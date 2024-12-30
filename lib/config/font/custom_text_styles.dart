@@ -13,51 +13,33 @@ class CustomTextStyles {
         color: Colors.black)!;
   }
 
-  static TextStyle bold_18_td_color(BuildContext context) {
+  static TextStyle regular_12_red_noSpacing(BuildContext context) {
     return TextStyleBlueprint.style(context,
-        fontSize: AppDimensions.getFonTSize18,
-        fontWeight: TextStyleBlueprint.boldFontWeight,
-        height: 1,
-        color: StaticColors.td_color)!;
+        fontSize: 14, fontWeight: FontWeight.w400, color: Colors.red)!
+        .copyWith(letterSpacing: 0);
   }
 
-  static TextStyle bold_24_orange_appbarText(BuildContext context) {
+  static TextStyle semiBold_14_black_noSpacing(BuildContext context) {
     return TextStyleBlueprint.style(context,
-        fontSize: AppDimensions.getFonTSize24,
-        fontWeight: TextStyleBlueprint.boldFontWeight,
-        height: 1,
-        color: StaticColors.td_color)!;
+        fontSize: 14, fontWeight: FontWeight.w500, color: Colors.black)!
+        .copyWith(letterSpacing: 0);
   }
 
-  static TextStyle regular_20_black_appbarText(BuildContext context) {
-    return TextStyleBlueprint.style(context,
-        fontSize: AppDimensions.getFonTSize20,
-        fontWeight: TextStyleBlueprint.regularFontWeight,
-        height: 1,
-        color: Colors.black)!;
+  static TextStyle regular_14_black_noSpacing(BuildContext context) {
+    return TextStyleBlueprint.style(context, fontSize: 14, color: Colors.black)!
+        .copyWith(letterSpacing: 0);
   }
 
-  static TextStyle regular_15_black_appbarText(BuildContext context) {
-    return TextStyleBlueprint.style(context,
-        fontSize: AppDimensions.getFonTSize15,
-        fontWeight: TextStyleBlueprint.regularFontWeight,
-        height: 1,
-        color: Colors.black)!;
-  }
 
-  static TextStyle bold_18_white_saveButton(BuildContext context) {
-    return TextStyleBlueprint.style(context,
-        fontSize: AppDimensions.getFonTSize18,
-        fontWeight: TextStyleBlueprint.boldFontWeight,
-        height: 2.1,
-        color: Colors.white)!;
-  }
 
-  static TextStyle bold_14_black_appbarText(BuildContext context) {
-    return TextStyleBlueprint.style(context,
-        fontSize: AppDimensions.getFonTSize16,
-        fontWeight: TextStyleBlueprint.boldFontWeight,
-        height: 1,
-        color: Colors.black)!;
-  }
+
+
+
+
+
+
+
+
+
+
 }
