@@ -1,6 +1,4 @@
-import 'package:balance_project/features/home/presentation/pages/home_page.dart';
-import 'package:balance_project/features/home/presentation/pages/success_page.dart';
-import 'package:balance_project/features/home/presentation/pages/topup_page.dart';
+import 'package:balance_project/imports.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -12,9 +10,16 @@ class Routes {
   static final GlobalKey<NavigatorState> rootNavigatorKey =
       GlobalKey<NavigatorState>();
 
+  static final GlobalKey<NavigatorState> navigationBarKey =
+      GlobalKey<NavigatorState>();
+
   static const String mainScreen = '/';
   static const String topupScreen = '/topup';
   static const String successScreen = '/success';
+  static const String profileScreen = '/profile';
+  static const String searchScreen = '/search';
+  static const String feedScreen = '/feed';
+  static const String beneficirariesScreen = '/beneficiraries';
 
   static final GoRouter goRouter = GoRouter(
     observers: [],
@@ -22,24 +27,88 @@ class Routes {
     navigatorKey: rootNavigatorKey,
     debugLogDiagnostics: false,
     routes: <RouteBase>[
+      ShellRoute(
+          navigatorKey: navigationBarKey,
+          parentNavigatorKey: rootNavigatorKey,
+          routes: [
+            GoRoute(
+              parentNavigatorKey: navigationBarKey,
+              path: searchScreen,
+              name: searchScreen,
+              pageBuilder: (context, state) =>
+                  _fadeTransitionScreenWrapper(context, state, SearchPage()),
+            ),
+            GoRoute(
+              parentNavigatorKey: navigationBarKey,
+              path: beneficirariesScreen,
+              name: beneficirariesScreen,
+              pageBuilder: (context, state) => _fadeTransitionScreenWrapper(
+                  context, state, BeneficiariesPage()),
+            ),
+            GoRoute(
+              parentNavigatorKey: navigationBarKey,
+              path: mainScreen,
+              name: mainScreen,
+              pageBuilder: (context, state) =>
+                  _fadeTransitionScreenWrapper(context, state, HomePage()),
+            ),
+            GoRoute(
+              parentNavigatorKey: navigationBarKey,
+              path: feedScreen,
+              name: feedScreen,
+              pageBuilder: (context, state) =>
+                  _fadeTransitionScreenWrapper(context, state, FeedPage()),
+            ),
+            GoRoute(
+              parentNavigatorKey: navigationBarKey,
+              path: profileScreen,
+              name: profileScreen,
+              pageBuilder: (context, state) =>
+                  _fadeTransitionScreenWrapper(context, state, ProfilePage()),
+            ),
+          ],
+          builder: (context, state, child) {
+            return Scaffold(
+              body: child,
+              bottomNavigationBar: CustomNavigationBar(
+                onTap: (index) {
+                  if (index == 0) {
+                    Routes.navigateToScreen(
+                        Routes.searchScreen, NavigateType.goNamed, context);
+                    return;
+                  } else if (index == 1) {
+                    Routes.navigateToScreen(Routes.beneficirariesScreen,
+                        NavigateType.goNamed, context);
+                    return;
+                  } else if (index == 2) {
+                    Routes.navigateToScreen(
+                        Routes.mainScreen, NavigateType.goNamed, context);
+                    return;
+                  } else if (index == 3) {
+                    Routes.navigateToScreen(
+                        Routes.feedScreen, NavigateType.goNamed, context);
+                    return;
+                  } else if (index == 4) {
+                    Routes.navigateToScreen(
+                        Routes.profileScreen, NavigateType.goNamed, context);
+                    return;
+                  }
+                },
+              ),
+            );
+          }),
       GoRoute(
-        path: "/",
-        pageBuilder: (context, state) =>
-            fadeTransitionScreenWrapper(context, state, HomePage()),
-      ),
-      GoRoute(
-        parentNavigatorKey: rootNavigatorKey,
-        path: successScreen,
-        name: successScreen,
-        pageBuilder: (context, state) =>
-            fadeTransitionScreenWrapper(context, state, SuccessPage()),
-      ),
+          parentNavigatorKey: rootNavigatorKey,
+          path: successScreen,
+          name: successScreen,
+          pageBuilder: (context, state) =>
+              _fadeTransitionScreenWrapper(context, state, SuccessPage())),
       GoRoute(
           parentNavigatorKey: rootNavigatorKey,
           path: topupScreen,
           name: topupScreen,
           pageBuilder: (context, state) =>
-              fadeTransitionScreenWrapper(context, state, TopupPage())),
+              _fadeTransitionScreenWrapper(context, state, TopupPage())),
     ],
   );
 
@@ -79,7 +148,7 @@ class Routes {
     }
   }
 
-  static CustomTransitionPage<dynamic> fadeTransitionScreenWrapper(
+  static CustomTransitionPage<dynamic> _fadeTransitionScreenWrapper(
       BuildContext context, dynamic state, Widget screen) {
     return CustomTransitionPage(
       transitionDuration: const Duration(milliseconds: 500),
@@ -95,5 +164,3 @@ class Routes {
     );
   }
 }
-
-enum NavigateType { pushNamed, goNamed, pushReplacementNamed }

@@ -10,7 +10,6 @@ class HomePage extends BaseStatelessPage {
   @override
   Widget body(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CustomNavigationBar(onTap: (index) {}),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
