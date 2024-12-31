@@ -1,4 +1,5 @@
 import 'package:balance_project/features/home/presentation/pages/home_page.dart';
+import 'package:balance_project/features/home/presentation/pages/topup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,14 +12,24 @@ class Routes {
       GlobalKey<NavigatorState>();
 
   static const String mainScreen = '/';
+  static const String topupScreen = '/topup';
+  static const String successScreen = '/success';
 
   static final GoRouter goRouter = GoRouter(
     observers: [],
     initialLocation: mainScreen,
     navigatorKey: rootNavigatorKey,
     debugLogDiagnostics: false,
-    routes: [
+    routes: <RouteBase>[
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: topupScreen,
+        name: topupScreen,
+        builder: (context, state) => TopupPage(),
+      ),
       GoRoute(path: "/", builder: (context, state) => HomePage()),
+      // GoRoute(path: topupScreen, builder: (context, state) => TopupPage()),
+      // GoRoute(path: successScreen, builder: (context, state) => SuccessPage()),
     ],
   );
 
