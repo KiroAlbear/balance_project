@@ -128,10 +128,3 @@ flutter:
   assets:
     - assets/images/png/
     - assets/images/svg/
-
-  fonts:
-    - family: Almarai
-      fonts:
-        - asset: assets/fonts/Almarai/Almarai-Bold.ttf
-        - asset: assets/fonts/Almarai/Almarai-Light.ttf
-        - asset: assets/fonts/Almarai/Almarai-Regular.ttf

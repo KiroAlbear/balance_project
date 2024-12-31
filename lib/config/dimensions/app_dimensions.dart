@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AppDimensions {
   static ScreenUtil screenUtil = ScreenUtil();
 
-
   //figma or adobe xd design size
   static Size designSize = const Size(430, 932);
   static double? width;

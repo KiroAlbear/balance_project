@@ -7,6 +7,9 @@ class StaticColors {
   static const Color td_color = Color(0xfff27822);
   static const Color themeColor = Color(0xff007dc4);
   static const Color themeColor2 = Color(0xff00bbff);
+  static const Color buttonStartColor = Color(0xff157C8C);
+
+  static const Color greyColor_5fb = Color(0xfff6f5fb);
   static const Color black_735 = Color(0xff2C3735);
   static const Color lightTextColor_03E = Color(0xff19303E);
   static const Color blackTextColor_858 = Color(0xff2F4858);
@@ -19,7 +22,7 @@ class StaticColors {
   static const Color buttonRippleColor_5e5 = Color(0x74E5E5E5);
   static const Color buttonDimmedTextColor_fef = Color(0xffefefef);
   static const Color drawerDarkBgColor_f1f = const Color(0xff1f1f1f);
-  static const Color lightBgColor_3F5 = const Color(0xffF2F3F5);
+  static const Color lightBgColor_3F5 = const Color(0xffd5e4ff);
   static const Color drawerLightBgColor_5e5 = const Color(0xffe5e5e5);
   static const Color initialBorderColor_EE4 = Color(0xffDEDEE4);
   static const Color errorColor_353 = Color(0xffEC2353);

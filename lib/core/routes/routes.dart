@@ -29,9 +29,6 @@ class Routes {
     Map<String, String>? queryParameters,
     Object? extra,
   }) async {
-    if (screenName == "") {
-      return;
-    }
     switch (navigateType) {
       case NavigateType.pushNamed:
         GoRouter.of(context).pushNamed(screenName,

@@ -12,8 +12,6 @@ class TextStyleBlueprint {
 
   late Map<String, TextStyle> basicTextStylesMap;
 
-  static String almaraiFontFamily = 'Almarai';
-
   static TextStyle? style(
     BuildContext context, {
     Color? color,
@@ -29,7 +27,6 @@ class TextStyleBlueprint {
       color: color,
       fontSize: fontSize,
       height: height,
-      fontFamily: fontFamily ?? almaraiFontFamily,
       decoration: decoration,
       fontWeight: fontWeight,
     );

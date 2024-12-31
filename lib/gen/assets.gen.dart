@@ -48,6 +48,9 @@ class $AssetsImagesSvgGen {
   SvgGenImage get icError =>
       const SvgGenImage('assets/images/svg/ic_error.svg');
 
+  /// File path: assets/images/svg/ic_next.svg
+  SvgGenImage get icNext => const SvgGenImage('assets/images/svg/ic_next.svg');
+
   /// File path: assets/images/svg/map_nav_icon.svg
   SvgGenImage get mapNavIcon =>
       const SvgGenImage('assets/images/svg/map_nav_icon.svg');
@@ -80,6 +83,7 @@ class $AssetsImagesSvgGen {
         contactUsNavIcon,
         homeNavIcon,
         icError,
+        icNext,
         mapNavIcon,
         moreNavIcon,
         nodata,

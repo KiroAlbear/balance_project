@@ -7,13 +7,13 @@ class LineSeparatorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.0,vertical: paddingHeight??50.h),
+      padding: EdgeInsets.symmetric(vertical: paddingHeight ?? 50.h),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
           Expanded(
             child: Container(
-              color: Colors.black,
+              color: Colors.black.withOpacity(0.2),
               height: 0.5,
               width: double.infinity,
             ),
