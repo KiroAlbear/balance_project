@@ -24,7 +24,7 @@ class CustomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CurvedNavigationBar(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
       color: StaticColors.themeColor,
       index: 2,
       buttonBackgroundColor: StaticColors.themeColor.withOpacity(0.8),

@@ -11,6 +11,18 @@ class BeneficiariesPage extends BaseStatelessPage {
   Widget body(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      floatingActionButton: FloatingActionButton(
+        shape: CircleBorder(),
+        backgroundColor: StaticColors.themeColor,
+        onPressed: () {
+          // Routes.navigateToScreen(
+          //     Routes.addBeneficiaryScreen, NavigateType.pushNamed, context);
+        },
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
       body: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
