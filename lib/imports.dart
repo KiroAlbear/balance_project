@@ -79,6 +79,7 @@ export 'features/beneficiaries/presentation/manager/blocs/beneficiaries_bloc.dar
 export 'features/beneficiaries/presentation/manager/blocs/beneficiaries_event.dart';
 export 'features/beneficiaries/presentation/manager/blocs/beneficiaries_state.dart';
 export 'features/beneficiaries/presentation/pages/beneficiaries_page.dart';
+export 'features/beneficiaries/presentation/widgets/beneficiary_item.dart';
 export 'features/feed/presentation/pages/feed_page.dart';
 export 'features/home/data/data_sources/home_remote_datasource.dart';
 export 'features/home/data/models/home_model.dart';

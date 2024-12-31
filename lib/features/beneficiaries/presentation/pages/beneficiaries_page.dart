@@ -1,4 +1,4 @@
-import 'package:balance_project/core/base_pages/base_stateless_page.dart';
+import 'package:balance_project/imports.dart';
 import 'package:flutter/material.dart';
 
 class BeneficiariesPage extends BaseStatelessPage {
@@ -9,8 +9,30 @@ class BeneficiariesPage extends BaseStatelessPage {
 
   @override
   Widget body(BuildContext context) {
-    return Center(
-      child: Text("Beneficiaries Page"),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            children: [
+              20.flexPaddingHeight,
+              Text(
+                "Beneficiaries List",
+                textAlign: TextAlign.center,
+                style: CustomTextStyles.bold_20_black_appbarText(context),
+              ),
+              20.flexPaddingHeight,
+              BeneficiaryItem(
+                name: "Ahmed",
+                phone: "01000000000",
+              ),
+              20.flexPaddingHeight,
+              BeneficiaryItem(
+                name: "John",
+                phone: "01012344000",
+              ),
+            ],
+          )),
     );
   }
 }
