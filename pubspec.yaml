@@ -58,6 +58,7 @@ dependencies:
   flutter_widget_from_html: ^0.14.2
   html: ^0.15.4
 
+
   #Pretty Dio logger is a Dio interceptor that logs network calls in a pretty, easy to read format
   pretty_dio_logger: ^1.3.1
 
@@ -73,6 +74,7 @@ dependencies:
 #  quill_html_editor:
   draggable_scrollbar: ^0.1.0
   fleather: ^1.19.0
+  curved_labeled_navigation_bar: ^2.0.5
 index_generator:
   exclude:
     - '**.g.dart'

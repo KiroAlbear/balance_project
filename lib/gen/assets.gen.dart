@@ -36,16 +36,25 @@ class $AssetsImagesPngGen {
 class $AssetsImagesSvgGen {
   const $AssetsImagesSvgGen();
 
+  /// File path: assets/images/svg/contact_us_nav_icon.svg
+  SvgGenImage get contactUsNavIcon =>
+      const SvgGenImage('assets/images/svg/contact_us_nav_icon.svg');
+
+  /// File path: assets/images/svg/home_nav_icon.svg
+  SvgGenImage get homeNavIcon =>
+      const SvgGenImage('assets/images/svg/home_nav_icon.svg');
+
   /// File path: assets/images/svg/ic_error.svg
   SvgGenImage get icError =>
       const SvgGenImage('assets/images/svg/ic_error.svg');
 
-  /// File path: assets/images/svg/logo.svg
-  SvgGenImage get logo => const SvgGenImage('assets/images/svg/logo.svg');
+  /// File path: assets/images/svg/map_nav_icon.svg
+  SvgGenImage get mapNavIcon =>
+      const SvgGenImage('assets/images/svg/map_nav_icon.svg');
 
-  /// File path: assets/images/svg/logowhite.svg
-  SvgGenImage get logowhite =>
-      const SvgGenImage('assets/images/svg/logowhite.svg');
+  /// File path: assets/images/svg/more_nav_icon.svg
+  SvgGenImage get moreNavIcon =>
+      const SvgGenImage('assets/images/svg/more_nav_icon.svg');
 
   /// File path: assets/images/svg/nodata.svg
   SvgGenImage get nodata => const SvgGenImage('assets/images/svg/nodata.svg');
@@ -53,6 +62,10 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/placehold.svg
   SvgGenImage get placehold =>
       const SvgGenImage('assets/images/svg/placehold.svg');
+
+  /// File path: assets/images/svg/settings_nav_icon.svg
+  SvgGenImage get settingsNavIcon =>
+      const SvgGenImage('assets/images/svg/settings_nav_icon.svg');
 
   /// File path: assets/images/svg/toast_error_icon.svg
   SvgGenImage get toastErrorIcon =>
@@ -64,11 +77,14 @@ class $AssetsImagesSvgGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
+        contactUsNavIcon,
+        homeNavIcon,
         icError,
-        logo,
-        logowhite,
+        mapNavIcon,
+        moreNavIcon,
         nodata,
         placehold,
+        settingsNavIcon,
         toastErrorIcon,
         toastSuccessIcon
       ];

@@ -5,7 +5,8 @@ class StaticColors {
   StaticColors._();
   static const Color appTheme_55B = Color(0xff00755B);
   static const Color td_color = Color(0xfff27822);
-  static const Color themeColor = Color(0xff2CBBD2);
+  static const Color themeColor = Color(0xff007dc4);
+  static const Color themeColor2 = Color(0xff00bbff);
   static const Color black_735 = Color(0xff2C3735);
   static const Color lightTextColor_03E = Color(0xff19303E);
   static const Color blackTextColor_858 = Color(0xff2F4858);
