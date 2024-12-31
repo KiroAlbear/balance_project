@@ -1,5 +1,6 @@
 import 'package:balance_project/config/font/custom_text_styles.dart';
 import 'package:balance_project/core/widgets/custom_gradient_button.dart';
+import 'package:balance_project/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 class SuccessPage extends StatelessWidget {
@@ -10,10 +11,11 @@ class SuccessPage extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(height: 100),
-        Icon(
-          Icons.check_circle_sharp,
-          color: Colors.blue.withOpacity(0.7),
-          size: 150,
+        SizedBox(
+          width: 150,
+          child: Image.asset(
+            Assets.images.png.check.path,
+          ),
         ),
         const SizedBox(height: 20),
         Text(
