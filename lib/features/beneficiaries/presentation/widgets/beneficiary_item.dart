@@ -16,32 +16,44 @@ class BeneficiaryItem extends StatelessWidget {
         padding: EdgeInsets.symmetric(
             horizontal: AppDimensions.w(8), vertical: AppDimensions.h(12)),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              width: AppDimensions.w(70),
-              height: AppDimensions.h(70),
-              decoration: BoxDecoration(
-                color: Colors.blue[100],
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: Center(
-                  child: Text(
-                name[0],
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              )),
-            ),
-            SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Row(
               children: [
-                Text(
-                  name,
-                  style: CustomTextStyles.bold_14_black(context),
+                Container(
+                  width: AppDimensions.w(70),
+                  height: AppDimensions.h(70),
+                  decoration: BoxDecoration(
+                    color: Colors.blue[100],
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  child: Center(
+                      child: Text(
+                    name[0],
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  )),
                 ),
-                Text(phone)
+                SizedBox(width: 10),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      name,
+                      style: CustomTextStyles.bold_14_black(context),
+                    ),
+                    Text(phone)
+                  ],
+                ),
               ],
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.delete,
+                color: Colors.red[400],
+              ),
             )
           ],
         ),

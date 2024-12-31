@@ -5,13 +5,9 @@ import 'package:balance_project/imports.dart';
 class ParentState {
   Status? status = Status.loading;
   Status savingStatus;
-  List<CustomListItemModel>? customList;
 
   String message;
 
   ParentState(
-      {this.status,
-      this.customList,
-      this.savingStatus = Status.initial,
-      this.message = ""});
+      {this.status, this.savingStatus = Status.initial, this.message = ""});
 }

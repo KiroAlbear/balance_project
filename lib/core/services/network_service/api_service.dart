@@ -19,11 +19,6 @@ class ApiService {
         // sendTimeout: const Duration(seconds: 30),
       );
 
-      // (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () =>
-      //     HttpClient()
-      //       ..badCertificateCallback =
-      //           (X509Certificate cert, String host, int port) => true;
-
       dio.httpClientAdapter = HttpClientAdapter();
       dio.options = options;
       dio.interceptors.add(PrettyDioLogger(
@@ -31,7 +26,7 @@ class ApiService {
         requestHeader: true,
         responseHeader: true,
       ));
-      dio.interceptors.add(ApiInterceptors());
+
       _instance = ApiService();
     }
     return _instance!;

@@ -22,7 +22,6 @@ export 'core/base_pages/base_page_mixin.dart';
 export 'core/base_pages/base_stateful_page.dart';
 export 'core/base_pages/base_stateless_page.dart';
 export 'core/models/custom_list_item_converter.dart';
-export 'core/models/custom_list_item_model.dart';
 export 'core/models/error_handling_models/error_model.dart';
 export 'core/models/error_handling_models/exception.dart';
 export 'core/models/error_handling_models/failure.dart';
