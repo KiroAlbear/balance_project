@@ -1,37 +1,39 @@
-import 'package:balance_project/config/font/custom_text_styles.dart';
-import 'package:balance_project/core/widgets/custom_gradient_button.dart';
-import 'package:balance_project/gen/assets.gen.dart';
+import 'package:balance_project/imports.dart';
 import 'package:flutter/material.dart';
 
-class SuccessPage extends StatelessWidget {
+class SuccessPage extends BaseStatelessPage {
   const SuccessPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget body(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 100),
+        100.flexPaddingHeight,
         SizedBox(
           width: 150,
           child: Image.asset(
             Assets.images.png.check.path,
           ),
         ),
-        const SizedBox(height: 20),
+        20.flexPaddingHeight,
         Text(
           "Payment successful",
           textAlign: TextAlign.center,
           style: CustomTextStyles.bold_20_black_appbarText(context),
         ),
-        const SizedBox(height: 5),
+        5.flexPaddingHeight,
         Text(
           "Thank you for using our service",
           textAlign: TextAlign.center,
           style: CustomTextStyles.regular_16_black(context),
         ),
-        const SizedBox(height: 200),
+        220.flexPaddingHeight,
         CustomGradientButton(
-          onTap: () {},
+          onTap: () {
+            Routes.navigateToFirstScreen(
+              context,
+            );
+          },
           text: "Return To Home",
         ),
       ],

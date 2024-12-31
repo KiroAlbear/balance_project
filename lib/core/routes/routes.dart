@@ -1,4 +1,5 @@
 import 'package:balance_project/features/home/presentation/pages/home_page.dart';
+import 'package:balance_project/features/home/presentation/pages/success_page.dart';
 import 'package:balance_project/features/home/presentation/pages/topup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -22,14 +23,23 @@ class Routes {
     debugLogDiagnostics: false,
     routes: <RouteBase>[
       GoRoute(
-        parentNavigatorKey: rootNavigatorKey,
-        path: topupScreen,
-        name: topupScreen,
-        builder: (context, state) => TopupPage(),
+        path: "/",
+        pageBuilder: (context, state) =>
+            fadeTransitionScreenWrapper(context, state, HomePage()),
       ),
-      GoRoute(path: "/", builder: (context, state) => HomePage()),
-      // GoRoute(path: topupScreen, builder: (context, state) => TopupPage()),
-      // GoRoute(path: successScreen, builder: (context, state) => SuccessPage()),
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: successScreen,
+        name: successScreen,
+        pageBuilder: (context, state) =>
+            fadeTransitionScreenWrapper(context, state, SuccessPage()),
+      ),
+      GoRoute(
+          parentNavigatorKey: rootNavigatorKey,
+          path: topupScreen,
+          name: topupScreen,
+          pageBuilder: (context, state) =>
+              fadeTransitionScreenWrapper(context, state, TopupPage())),
     ],
   );
 
@@ -72,7 +82,7 @@ class Routes {
   static CustomTransitionPage<dynamic> fadeTransitionScreenWrapper(
       BuildContext context, dynamic state, Widget screen) {
     return CustomTransitionPage(
-      transitionDuration: const Duration(milliseconds: 800),
+      transitionDuration: const Duration(milliseconds: 500),
       transitionsBuilder: (BuildContext context, Animation<double> animation,
           Animation<double> secondaryAnimation, Widget child) {
         return FadeTransition(
@@ -84,27 +94,6 @@ class Routes {
       child: screen,
     );
   }
-}
-
-class CustomSlideTransition extends CustomTransitionPage<void> {
-  CustomSlideTransition({super.key, required super.child})
-      : super(
-          transitionDuration: const Duration(milliseconds: 500),
-          transitionsBuilder:
-              (_, Animation<double> animation, __, Widget child) {
-            return SlideTransition(
-              position: animation.drive(
-                Tween(
-                  begin: const Offset(0, -1),
-                  end: Offset.zero,
-                ).chain(
-                  CurveTween(curve: Curves.ease),
-                ),
-              ),
-              child: child,
-            );
-          },
-        );
 }
 
 enum NavigateType { pushNamed, goNamed, pushReplacementNamed }

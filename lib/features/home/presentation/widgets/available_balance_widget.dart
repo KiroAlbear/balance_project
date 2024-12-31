@@ -1,4 +1,5 @@
 import 'package:balance_project/config/colors/static_colors.dart';
+import 'package:balance_project/config/dimensions/app_dimensions.dart';
 import 'package:balance_project/config/font/custom_text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,8 @@ class AvailableBalanceWidget extends StatelessWidget {
       margin: EdgeInsets.zero,
       color: StaticColors.themeColor,
       child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: EdgeInsets.symmetric(
+            horizontal: AppDimensions.w(14), vertical: AppDimensions.h(20)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[

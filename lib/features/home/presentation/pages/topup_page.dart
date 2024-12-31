@@ -1,33 +1,24 @@
-import 'package:balance_project/config/font/custom_text_styles.dart';
-import 'package:balance_project/core/base_pages/base_stateless_page.dart';
 import 'package:balance_project/core/widgets/custom_appbar.dart';
-import 'package:balance_project/core/widgets/custom_gradient_button.dart';
-import 'package:balance_project/core/widgets/line_seperator_widget.dart';
-import 'package:balance_project/features/home/presentation/widgets/choose_beneficiary_card.dart';
-import 'package:balance_project/features/home/presentation/widgets/cost_row.dart';
+import 'package:balance_project/imports.dart';
 import 'package:flutter/material.dart';
 
 class TopupPage extends BaseStatelessPage {
   const TopupPage({super.key});
 
   @override
-  Widget? appbarWidget() => CustomAppbar(title: "PaymentDetails");
+  Widget? appbarWidget() => CustomAppbar(title: "Payment Details");
 
   @override
   Widget body(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(
-          height: 12,
-        ),
+        10.flexPaddingHeight,
         // Text(
         //   'Payment Details',
         //   style: CustomTextStyles.bold_20_black_appbarText(context),
         // ),
-        const SizedBox(
-          height: 12,
-        ),
+        12.flexPaddingHeight,
         Text(
           'Beneficiaries Details',
           style: CustomTextStyles.regular_14_black(context),
@@ -35,9 +26,7 @@ class TopupPage extends BaseStatelessPage {
         ChooseBeneficiaryCard(
           text: 'Select Beneficiary',
         ),
-        SizedBox(
-          height: 12,
-        ),
+        12.flexPaddingHeight,
         Text(
           'Amount Details',
           style: CustomTextStyles.regular_14_black(context),
@@ -45,21 +34,22 @@ class TopupPage extends BaseStatelessPage {
         ChooseBeneficiaryCard(
           text: 'Select Amount',
         ),
-        SizedBox(
-          height: 25,
-        ),
+        20.flexPaddingHeight,
         LineSeparatorWidget(
-          paddingHeight: 10,
+          paddingHeight: AppDimensions.h(10),
         ),
         CostRow(title: "Transaction Amount", cost: "10"),
         CostRow(title: "Transaction Fees", cost: "2"),
         LineSeparatorWidget(
           paddingHeight: 10,
         ),
-        SizedBox(
-          height: 25,
-        ),
-        CustomGradientButton(text: "Pay", onTap: () {})
+        25.flexPaddingHeight,
+        CustomGradientButton(
+            text: "Pay",
+            onTap: () {
+              Routes.navigateToScreen(
+                  Routes.successScreen, NavigateType.pushNamed, context);
+            })
       ],
     );
   }
