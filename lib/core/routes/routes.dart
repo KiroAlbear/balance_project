@@ -1,4 +1,4 @@
-import 'package:balance_project/imports.dart';
+import 'package:balance_project/features/home/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -18,7 +18,7 @@ class Routes {
     navigatorKey: rootNavigatorKey,
     debugLogDiagnostics: false,
     routes: [
-      GoRoute(path: "/", builder: (context, state) => TestSplashScreen())
+      GoRoute(path: "/", builder: (context, state) => HomePage()),
     ],
   );
 
@@ -28,21 +28,14 @@ class Routes {
     BuildContext context, {
     Map<String, String>? queryParameters,
     Object? extra,
-    Function()? afterComplete,
   }) async {
     if (screenName == "") {
       return;
     }
     switch (navigateType) {
       case NavigateType.pushNamed:
-        GoRouter.of(context)
-            .pushNamed(screenName,
-                queryParameters: queryParameters ?? {}, extra: extra)
-            .whenComplete(() {
-          if (afterComplete != null) {
-            afterComplete();
-          }
-        });
+        GoRouter.of(context).pushNamed(screenName,
+            queryParameters: queryParameters ?? {}, extra: extra);
         break;
 
       case NavigateType.goNamed:
@@ -51,14 +44,8 @@ class Routes {
         break;
 
       case NavigateType.pushReplacementNamed:
-        GoRouter.of(context)
-            .pushReplacementNamed(screenName,
-                queryParameters: queryParameters ?? {}, extra: extra)
-            .whenComplete(() {
-          if (afterComplete != null) {
-            afterComplete();
-          }
-        });
+        GoRouter.of(context).pushReplacementNamed(screenName,
+            queryParameters: queryParameters ?? {}, extra: extra);
         break;
 
       default:

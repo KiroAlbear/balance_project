@@ -26,13 +26,15 @@ class CustomNavigationBar extends StatelessWidget {
     return CurvedNavigationBar(
       backgroundColor: Colors.transparent,
       color: StaticColors.themeColor,
+      index: 2,
       buttonBackgroundColor: StaticColors.themeColor.withOpacity(0.8),
       items: [
-        _buildCurvedNavigationBarItem(Icons.home_outlined, 'Home'),
         _buildCurvedNavigationBarItem(Icons.search, 'Search'),
-        _buildCurvedNavigationBarItem(Icons.chat_bubble_outline, 'Chat'),
+        _buildCurvedNavigationBarItem(
+            Icons.people_outline_rounded, 'Beneficiaries'),
+        _buildCurvedNavigationBarItem(Icons.home_outlined, 'Home'),
         _buildCurvedNavigationBarItem(Icons.newspaper, 'Feed'),
-        _buildCurvedNavigationBarItem(Icons.perm_identity, 'Personal'),
+        _buildCurvedNavigationBarItem(Icons.perm_identity, 'Profile'),
       ],
       onTap: (index) {
         onTap(index);
