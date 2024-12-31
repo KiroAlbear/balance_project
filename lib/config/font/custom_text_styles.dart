@@ -55,6 +55,11 @@ class CustomTextStyles {
         fontSize: 14, color: Colors.black)!;
   }
 
+  static TextStyle regular_16_black(BuildContext context) {
+    return TextStyleBlueprint.style(context,
+        fontSize: 16, color: Colors.black)!;
+  }
+
   static TextStyle regular_14_black_noSpacing(BuildContext context) {
     return TextStyleBlueprint.style(context, fontSize: 14, color: Colors.black)!
         .copyWith(letterSpacing: 0);
