@@ -7,6 +7,64 @@ class TopupPage extends BaseStatelessPage {
   @override
   Widget? appbarWidget() => CustomAppbar(title: "Payment Details");
 
+  Widget _buildBeneficiariesList() {
+    return ParentBloc<BeneficiariesBloc, BeneficiariesState>(
+      builder: (state) {
+        if (state.beneficiaries == null) {
+          return SizedBox();
+        }
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: 12.0),
+          child: ListView.separated(
+            shrinkWrap: true,
+            separatorBuilder: (context, index) {
+              return 12.flexPaddingHeight;
+            },
+            itemCount: state.beneficiaries!.length,
+            itemBuilder: (context, index) {
+              return BeneficiaryItem(
+                showDeleteButton: false,
+                index: index,
+                name: state.beneficiaries![index].name!,
+                phone: state.beneficiaries![index].phoneNumber!,
+                onTap: (p0) {
+                  Navigator.pop(context);
+                },
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  void _showSelectBeneficiariesBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      useSafeArea: true,
+      backgroundColor: Colors.white,
+      context: context,
+      builder: (context) {
+        return SizedBox(
+          height: 500,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              20.flexPaddingHeight,
+              Text(
+                "Select Beneficiary",
+                textAlign: TextAlign.center,
+                style: CustomTextStyles.bold_20_black_appbarText(context),
+              ),
+              20.flexPaddingHeight,
+              _buildBeneficiariesList(),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget body(BuildContext context) {
     return Column(
@@ -17,16 +75,20 @@ class TopupPage extends BaseStatelessPage {
           'Beneficiaries Details',
           style: CustomTextStyles.regular_14_black(context),
         ),
-        const ChooseBeneficiaryCard(
+        ChooseBeneficiaryCard(
           text: 'Select Beneficiary',
+          onTap: () {
+            _showSelectBeneficiariesBottomSheet(context);
+          },
         ),
         12.flexPaddingHeight,
         Text(
           'Amount Details',
           style: CustomTextStyles.regular_14_black(context),
         ),
-        const ChooseBeneficiaryCard(
+        ChooseBeneficiaryCard(
           text: 'Select Amount',
+          onTap: () {},
         ),
         20.flexPaddingHeight,
         LineSeparatorWidget(

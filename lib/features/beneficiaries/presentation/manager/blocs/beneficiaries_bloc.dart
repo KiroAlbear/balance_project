@@ -25,7 +25,7 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
       emit(state.copyWith(showOverlayLoading: false)..status = Status.loading);
     }
     // if (event.isFiringFromDelete == false)
-    await Future.delayed(Duration(seconds: 1));
+    // await Future.delayed(Duration(seconds: 1));
 
     Either<Failure, List<BeneficiariesModel>> result =
         await beneficiariesUseCase.call(NoParams());
@@ -37,15 +37,18 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
           ..errorMessage = failure.toErrorModel().message);
       },
       (List<BeneficiariesModel> beneficiaries) {
-        if (beneficiaries.isEmpty)
-          emit(
-              state.copyWith(showOverlayLoading: false)..status = Status.empty);
-        else {
+        if (beneficiaries.isEmpty) {
           emit(state.copyWith(
-              showOverlayLoading: false,
-              beneficiaries: beneficiaries,
-              isListChanged: !state.isListChanged)
-            ..status = Status.success);
+            showOverlayLoading: false,
+            isListChanged: !state.isListChanged,
+            beneficiaries: beneficiaries,
+          )..status = Status.empty);
+        } else {
+          emit(state.copyWith(
+            showOverlayLoading: false,
+            beneficiaries: beneficiaries,
+            isListChanged: !state.isListChanged,
+          )..status = Status.success);
         }
       },
     );
@@ -53,9 +56,7 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
 
   FutureOr<void> _addBeneficiary(
       addBeneficiaryEvent event, Emitter<BeneficiariesState> emit) async {
-    emit(state.copyWith(
-        showOverlayLoading: true, isListChanged: !state.isListChanged)
-      ..status = Status.success);
+    emit(state.copyWith(showOverlayLoading: false)..status = Status.loading);
 
     Either<Failure, ApiResponseModel> result = await addBeneficiaryUseCase.call(
         AddBeneficiaryUseCaseParams(
@@ -68,7 +69,7 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
         AppToast.showToast(failure.toErrorModel().message);
       },
       (ApiResponseModel result) {
-        add(getBeneficiariesEvent(showOverlayLoading: true));
+        add(getBeneficiariesEvent(showOverlayLoading: false));
       },
     );
   }

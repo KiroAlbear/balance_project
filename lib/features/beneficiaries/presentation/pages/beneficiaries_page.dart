@@ -85,24 +85,29 @@ class _BeneficiariesPageState extends BaseState<BeneficiariesPage> {
                   ),
                   20.flexPaddingHeight,
                   ParentBloc<BeneficiariesBloc, BeneficiariesState>(
+                      listenWhen: (previous, current) =>
+                          previous.isListChanged != current.isListChanged,
                       listenerFunction: (context, state) {
-                    if (state.beneficiaries != null) {
-                      _beneficiariesCount = state.beneficiaries!.length;
-                    }
-                  }, builder: (BeneficiariesState state) {
-                    return ListView.separated(
-                      shrinkWrap: true,
-                      separatorBuilder: (context, index) {
-                        return 12.flexPaddingHeight;
+                        if (state.beneficiaries != null) {
+                          _beneficiariesCount = state.beneficiaries!.length;
+                        }
                       },
-                      itemCount: state.beneficiaries!.length,
-                      itemBuilder: (context, index) {
-                        return BeneficiaryItem(
-                            name: state.beneficiaries![index].name!,
-                            phone: state.beneficiaries![index].phoneNumber!);
-                      },
-                    );
-                  })
+                      builder: (BeneficiariesState state) {
+                        return ListView.separated(
+                          shrinkWrap: true,
+                          separatorBuilder: (context, index) {
+                            return 12.flexPaddingHeight;
+                          },
+                          itemCount: state.beneficiaries!.length,
+                          itemBuilder: (context, index) {
+                            return BeneficiaryItem(
+                                index: index,
+                                name: state.beneficiaries![index].name!,
+                                phone:
+                                    state.beneficiaries![index].phoneNumber!);
+                          },
+                        );
+                      })
                 ],
               )),
           BlocBuilder<BeneficiariesBloc, BeneficiariesState>(

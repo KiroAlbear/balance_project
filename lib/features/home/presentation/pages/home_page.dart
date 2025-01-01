@@ -16,6 +16,7 @@ class _HomePageState extends BaseState<HomePage> {
   @override
   void initState() {
     BlocProvider.of<HomeBloc>(context).add(getHomeBalanceEvent());
+    BlocProvider.of<BeneficiariesBloc>(context).add(getBeneficiariesEvent());
     super.initState();
   }
 

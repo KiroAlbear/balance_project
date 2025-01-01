@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 
 class ChooseBeneficiaryCard extends StatelessWidget {
   final String text;
-  const ChooseBeneficiaryCard({super.key, required this.text});
+  final void Function() onTap;
+  const ChooseBeneficiaryCard(
+      {super.key, required this.text, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,7 @@ class ChooseBeneficiaryCard extends StatelessWidget {
       color: StaticColors.greyColor_5fb,
       child: InkWell(
         borderRadius: BorderRadius.circular(10),
-        onTap: () {},
+        onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.all(28.0),
           child: Column(
