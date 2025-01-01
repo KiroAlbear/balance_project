@@ -1,4 +1,4 @@
-import 'package:balance_project/core/base_pages/base_page_mixin.dart';
+import 'package:balance_project/imports.dart';
 import 'package:flutter/material.dart';
 
 abstract class BaseStatefulPage extends StatefulWidget {
@@ -33,6 +33,11 @@ abstract class BaseState<T extends BaseStatefulPage> extends State<T>
       throw Exception(
           "You can't use both appbar and appbarWidget at the same time");
     }
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        AppToast.fToast.init(context);
+      },
+    );
     super.initState();
   }
 }

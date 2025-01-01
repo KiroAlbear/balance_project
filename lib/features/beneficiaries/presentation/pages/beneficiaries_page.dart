@@ -16,6 +16,7 @@ class _BeneficiariesPageState extends BaseState<BeneficiariesPage> {
   @override
   void initState() {
     BlocProvider.of<BeneficiariesBloc>(context).add(getBeneficiariesEvent());
+
     super.initState();
   }
 

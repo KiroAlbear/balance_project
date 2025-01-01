@@ -49,9 +49,8 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
 
     result.fold(
       (failure) {
-        emit(state.copyWith()
-          ..status = Status.error
-          ..errorMessage = failure.toErrorModel().message);
+        emit(state.copyWith()..status = Status.success);
+        AppToast.showToast(failure.toErrorModel().message);
       },
       (ApiResponseModel result) {
         add(getBeneficiariesEvent());

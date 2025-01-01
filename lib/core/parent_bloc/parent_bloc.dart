@@ -27,13 +27,13 @@ class ParentBloc<B extends StateStreamable<S>, S> extends StatelessWidget {
   Widget _buildMainWidget(BuildContext context, S state) {
     if ((state as ParentState).status == Status.initial) {
       return loadingWidget ??
-          Container(
+          Expanded(
               child: Center(
                   child: LoadingAnimationWidget.staggeredDotsWave(
                       color: StaticColors.themeColor, size: 50)));
     } else if (((state as ParentState).status == Status.loading)) {
       return loadingWidget ??
-          Container(
+          Expanded(
               child: Center(
                   child: LoadingAnimationWidget.staggeredDotsWave(
                       color: StaticColors.themeColor, size: 50)));

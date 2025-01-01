@@ -6,20 +6,20 @@ import 'package:fluttertoast/fluttertoast.dart';
 enum AppToastType { success, error, warning }
 
 class AppToast {
-  static final FToast _fToast = FToast();
+  static final FToast fToast = FToast();
 
   static void showToast(String message,
       {BuildContext? context,
       AppToastType type = AppToastType.error,
       bool isThereNavBar = false}) {
-    if (context != null) _fToast.init(context);
+    if (context != null) fToast.init(context);
 
     Color color = type == AppToastType.error
         ? const Color(0xffFCE6E8)
         : type == AppToastType.success
             ? const Color(0xffE7F8EB)
             : const Color(0xffFCF6E4);
-    _fToast.showToast(
+    fToast.showToast(
       child: _toastContainer(message, color, type, context),
       gravity: ToastGravity.TOP,
       toastDuration: const Duration(seconds: 3),
@@ -75,7 +75,7 @@ class AppToast {
               child: InkWell(
                 onTap: () {
                   //hide toast
-                  _fToast.removeCustomToast();
+                  fToast.removeCustomToast();
                 },
                 child: const Icon(
                   Icons.close,
@@ -87,16 +87,4 @@ class AppToast {
           ],
         ),
       );
-
-  static void showWebToast(String message, {String? hexColor}) {
-    Fluttertoast.showToast(
-        msg: message,
-        gravity: ToastGravity.BOTTOM,
-        fontAsset: "assets/fonts/Almarai/Almarai-Regular.ttf",
-        timeInSecForIosWeb: 3,
-        textColor: Colors.white,
-        webShowClose: true,
-        webPosition: "center",
-        webBgColor: hexColor ?? "#F44336");
-  }
 }
