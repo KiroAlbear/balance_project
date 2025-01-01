@@ -35,8 +35,12 @@ class $AssetsImagesPngGen {
   AssetGenImage get icLauncher =>
       const AssetGenImage('assets/images/png/ic_launcher.png');
 
+  /// File path: assets/images/png/verified.png
+  AssetGenImage get verified =>
+      const AssetGenImage('assets/images/png/verified.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [check, cross, icLauncher];
+  List<AssetGenImage> get values => [check, cross, icLauncher, verified];
 }
 
 class $AssetsImagesSvgGen {

@@ -18,10 +18,20 @@ class HomePage extends BaseStatelessPage {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             20.flexPaddingHeight,
-            Text(
-              "Hello, Ahmed",
-              textAlign: TextAlign.center,
-              style: CustomTextStyles.bold_20_black_appbarText(context),
+            Row(
+              children: [
+                Text(
+                  "Hello, User",
+                  textAlign: TextAlign.center,
+                  style: CustomTextStyles.bold_20_black_appbarText(context),
+                ),
+                5.flexPaddingWidth,
+                Image.asset(
+                  Assets.images.png.verified.path,
+                  width: 17,
+                  height: 17,
+                )
+              ],
             ),
             12.flexPaddingHeight,
             AvailableBalanceWidget(),

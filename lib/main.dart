@@ -15,18 +15,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       child: AnnotatedRegion(
-        value: SystemUiOverlayStyle(
-          statusBarColor: Colors.white,
-        ),
-        child: MaterialApp.router(
-          routerConfig: Routes.goRouter,
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
+          value: SystemUiOverlayStyle(
+            statusBarColor: Colors.white,
           ),
-        ),
-      ),
+          child: MaterialApp.router(
+            routerConfig: Routes.goRouter,
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+            ),
+          )),
     );
   }
 }
