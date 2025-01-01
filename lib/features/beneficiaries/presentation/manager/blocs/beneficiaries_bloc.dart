@@ -6,8 +6,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
   BeneficiariesUseCase beneficiariesUseCase;
-  BeneficiariesBloc(this.beneficiariesUseCase) : super(BeneficiariesState()) {
+  AddBeneficiaryUseCase addBeneficiaryUseCase;
+  BeneficiariesBloc(this.beneficiariesUseCase, this.addBeneficiaryUseCase)
+      : super(BeneficiariesState()) {
     on<getBeneficiariesEvent>(_getBeneficiaries);
+    on<addBeneficiaryEvent>(_addBeneficiary);
   }
 
   FutureOr<void> _getBeneficiaries(
@@ -27,6 +30,26 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
       (List<BeneficiariesModel> beneficiaries) {
         emit(state.copyWith(beneficiaries: beneficiaries)
           ..status = Status.success);
+      },
+    );
+  }
+
+  FutureOr<void> _addBeneficiary(
+      addBeneficiaryEvent event, Emitter<BeneficiariesState> emit) async {
+    emit(state.copyWith()..status = Status.loading);
+
+    Either<Failure, ApiResponseModel> result = await addBeneficiaryUseCase.call(
+        AddBeneficiaryUseCaseParams(
+            name: event.name, phoneNumber: event.phoneNumber));
+
+    result.fold(
+      (failure) {
+        emit(state.copyWith()
+          ..status = Status.error
+          ..errorMessage = failure.toErrorModel().message);
+      },
+      (ApiResponseModel result) {
+        add(getBeneficiariesEvent());
       },
     );
   }

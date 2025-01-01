@@ -6,7 +6,10 @@ class ProvidersService {
   List<BlocProvider> getAppProviders(BuildContext context) {
     return [
       BlocProvider<BeneficiariesBloc>(
-        create: (_) => BeneficiariesBloc(getIt()),
+        create: (_) => BeneficiariesBloc(
+          getIt(),
+          getIt(),
+        ),
       ),
     ];
   }

@@ -3,4 +3,6 @@ import 'package:dartz/dartz.dart';
 
 abstract class BeneficiariesRepo {
   Future<Either<Failure, List<BeneficiariesModel>>> getBeneficiaries();
+  Future<Either<Failure, ApiResponseModel>> addBeneficiary(
+      AddBeneficiariesRequestModel requestModel);
 }

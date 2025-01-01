@@ -12,7 +12,8 @@ class CustomTextField extends StatefulWidget {
   final String lable;
   final String icon;
   final bool isRequired;
-  final bool isMultiLine;
+
+  final int? maxLength;
   final TextEditingController controller;
   final bool isButton;
   final void Function()? onTap;
@@ -22,8 +23,8 @@ class CustomTextField extends StatefulWidget {
       required this.lable,
       required this.icon,
       required this.controller,
+      this.maxLength,
       this.isRequired = false,
-      this.isMultiLine = false,
       this.isButton = false,
       this.onTap,
       this.type = CustomTextFieldType.text}) {
@@ -65,93 +66,92 @@ class _CustomTextFieldState extends State<CustomTextField> {
             ],
           ),
           child: Row(
-            crossAxisAlignment: widget.isMultiLine
-                ? CrossAxisAlignment.start
-                : CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
             children: [
-              Padding(
-                padding: EdgeInsets.only(
-                    top: widget.isMultiLine ? _verticalPadding + 10 : 0),
-                child: SvgPicture.asset(
-                  widget.icon,
-                  colorFilter: ColorFilter.mode(
-                      _isValid ? StaticColors.themeColor : Colors.red,
-                      BlendMode.srcIn),
-                ),
+              SvgPicture.asset(
+                widget.icon,
+                colorFilter: ColorFilter.mode(
+                    _isValid ? StaticColors.themeColor : Colors.red,
+                    BlendMode.srcIn),
               ),
               SizedBox(
                 width: 10,
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: _verticalPadding),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: widget.lable,
-                            style: CustomTextStyles.semiBold_14_black_noSpacing(
-                              context,
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: _verticalPadding),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: widget.lable,
+                              style:
+                                  CustomTextStyles.semiBold_14_black_noSpacing(
+                                context,
+                              ),
                             ),
-                          ),
-                          TextSpan(
-                            text: widget.isRequired ? " *" : "",
-                            style: TextStyle(
-                              color: StaticColors.themeColor,
-                              fontSize: 16,
+                            TextSpan(
+                              text: widget.isRequired ? " *" : "",
+                              style: TextStyle(
+                                color: StaticColors.themeColor,
+                                fontSize: 16,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 220,
-                      child: TextFormField(
-                        keyboardType: widget.type == CustomTextFieldType.number
-                            ? TextInputType.number
-                            : widget.type == CustomTextFieldType.email
-                                ? TextInputType.emailAddress
-                                : TextInputType.text,
-                        inputFormatters: [
-                          if (widget.type == CustomTextFieldType.number)
-                            FilteringTextInputFormatter.digitsOnly,
-                          if (widget.type == CustomTextFieldType.email)
-                            FilteringTextInputFormatter.singleLineFormatter
-                        ],
-                        validator: (value) {
-                          if ((value == null || value.isEmpty) &&
-                              widget.isRequired) {
-                            setState(() {
-                              _isValid = false;
-                            });
-                          } else {
-                            setState(() {
-                              _isValid = true;
-                            });
-                          }
-                          return null;
-                        },
-                        maxLines: widget.isMultiLine ? 4 : null,
-                        controller: widget.controller,
-                        style: CustomTextStyles.regular_14_black_noSpacing(
-                            context),
-                        cursorColor: StaticColors.themeColor,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          isDense: true,
-                          contentPadding:
-                              const EdgeInsets.symmetric(vertical: 0),
-                          hintText: widget.hint,
-                          hintStyle: TextStyle(
-                            height: 1,
-                            color: Colors.grey,
+                      SizedBox(
+                        width: 220,
+                        child: TextFormField(
+                          maxLength: widget.maxLength,
+                          keyboardType:
+                              widget.type == CustomTextFieldType.number
+                                  ? TextInputType.number
+                                  : widget.type == CustomTextFieldType.email
+                                      ? TextInputType.emailAddress
+                                      : TextInputType.text,
+                          inputFormatters: [
+                            if (widget.type == CustomTextFieldType.number)
+                              FilteringTextInputFormatter.digitsOnly,
+                            if (widget.type == CustomTextFieldType.email)
+                              FilteringTextInputFormatter.singleLineFormatter
+                          ],
+                          validator: (value) {
+                            if ((value == null || value.isEmpty) &&
+                                widget.isRequired) {
+                              setState(() {
+                                _isValid = false;
+                              });
+                            } else {
+                              setState(() {
+                                _isValid = true;
+                              });
+                            }
+                            return null;
+                          },
+                          controller: widget.controller,
+                          style: CustomTextStyles.regular_14_black_noSpacing(
+                              context),
+                          cursorColor: StaticColors.themeColor,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            isDense: true,
+                            contentPadding:
+                                const EdgeInsets.symmetric(vertical: 0),
+                            hintText: widget.hint,
+                            hintStyle: TextStyle(
+                              height: 1,
+                              color: Colors.grey,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               )
             ],

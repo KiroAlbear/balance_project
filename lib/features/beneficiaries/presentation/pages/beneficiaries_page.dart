@@ -23,12 +23,35 @@ class _BeneficiariesPageState extends BaseState<BeneficiariesPage> {
   Widget body(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: true,
       floatingActionButton: FloatingActionButton(
         shape: CircleBorder(),
         backgroundColor: StaticColors.themeColor,
         onPressed: () {
-          // Routes.navigateToScreen(
-          //     Routes.addBeneficiaryScreen, NavigateType.pushNamed, context);
+          showModalBottomSheet(
+            isScrollControlled: true,
+            useSafeArea: true,
+            backgroundColor: Colors.white,
+            context: context,
+            builder: (context) {
+              return SizedBox(
+                height: 500,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    20.flexPaddingHeight,
+                    Text(
+                      "Add Beneficiary",
+                      textAlign: TextAlign.center,
+                      style: CustomTextStyles.bold_20_black_appbarText(context),
+                    ),
+                    20.flexPaddingHeight,
+                    AddBeneficirayForm(),
+                  ],
+                ),
+              );
+            },
+          );
         },
         child: Icon(
           Icons.add,

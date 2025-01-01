@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 ElevatedButtonThemeData customElevatedButtonTheme = ElevatedButtonThemeData(
   style: ButtonStyle(
     elevation: WidgetStateProperty.all(.1),
-    backgroundColor: WidgetStateProperty.all<Color>(StaticColors.td_color),
+    backgroundColor: WidgetStateProperty.all<Color>(StaticColors.themeColor),
     foregroundColor: WidgetStateProperty.all<Color>(
       Colors.white,
     ),

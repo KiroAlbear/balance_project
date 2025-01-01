@@ -4,7 +4,6 @@ abstract class ApiUtility {
   // Common utility method to handle API response status codes
   T _handleStatusCode<T, B>({
     required Response<dynamic> response,
-    ApiResponseModel Function(dynamic)? customResponseModel,
     required Function(Map<String, dynamic> json) responseConverter,
   }) {
     if (response.statusCode == 200) {

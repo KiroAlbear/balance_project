@@ -9,4 +9,10 @@ class BeneficiariesRepoImp implements BeneficiariesRepo {
   Future<Either<Failure, List<BeneficiariesModel>>> getBeneficiaries() async {
     return _dataSource.getBeneficiaries();
   }
+
+  @override
+  Future<Either<Failure, ApiResponseModel>> addBeneficiary(
+      AddBeneficiariesRequestModel requestModel) {
+    return _dataSource.addBeneficiary(requestModel);
+  }
 }

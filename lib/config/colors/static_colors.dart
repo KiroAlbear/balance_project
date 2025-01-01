@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 class StaticColors {
   StaticColors._();
   static const Color appTheme_55B = Color(0xff00755B);
-  static const Color td_color = Color(0xfff27822);
   static const Color themeColor = Color(0xff007dc4);
   static const Color themeColor2 = Color(0xff00bbff);
   static const Color buttonStartColor = Color(0xff157C8C);

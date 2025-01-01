@@ -61,6 +61,14 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/ic_next.svg
   SvgGenImage get icNext => const SvgGenImage('assets/images/svg/ic_next.svg');
 
+  /// File path: assets/images/svg/ic_phone.svg
+  SvgGenImage get icPhone =>
+      const SvgGenImage('assets/images/svg/ic_phone.svg');
+
+  /// File path: assets/images/svg/ic_profile.svg
+  SvgGenImage get icProfile =>
+      const SvgGenImage('assets/images/svg/ic_profile.svg');
+
   /// File path: assets/images/svg/map_nav_icon.svg
   SvgGenImage get mapNavIcon =>
       const SvgGenImage('assets/images/svg/map_nav_icon.svg');
@@ -94,6 +102,8 @@ class $AssetsImagesSvgGen {
         homeNavIcon,
         icError,
         icNext,
+        icPhone,
+        icProfile,
         mapNavIcon,
         moreNavIcon,
         nodata,

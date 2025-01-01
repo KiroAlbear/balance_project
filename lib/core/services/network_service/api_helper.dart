@@ -11,7 +11,6 @@ abstract class ApiHelper extends ApiUtility {
   Future<Either<Failure, T>> postData<T>(
     String path, {
     Map<String, dynamic>? body,
-    Function(String)? onResponse,
     required T Function(Map<String, dynamic> json) responseConverter,
     Type? listType,
   }) async {
@@ -23,10 +22,6 @@ abstract class ApiHelper extends ApiUtility {
             path,
             body: body,
           );
-
-          if (onResponse != null) {
-            onResponse(response.data);
-          }
 
           return _handleStatusCode(
             response: response,
@@ -43,10 +38,7 @@ abstract class ApiHelper extends ApiUtility {
 
   Future<Either<Failure, T>> fetchData<T, B>(
     String path, {
-    bool authorizedApi = false,
     Object? body,
-    Function(Response<dynamic>)? onResponse,
-    ApiResponseModel Function(dynamic)? customResponseModel,
     required Function(Map<String, dynamic> json) responseConverter,
   }) async {
     return _executeApiCall<T>(
@@ -57,13 +49,8 @@ abstract class ApiHelper extends ApiUtility {
             body: body,
           );
 
-          if (onResponse != null) {
-            onResponse(response);
-          }
-
           return _handleStatusCode<T, B>(
             response: response,
-            customResponseModel: customResponseModel,
             responseConverter: responseConverter,
           );
         } catch (error) {
