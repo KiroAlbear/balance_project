@@ -8,10 +8,6 @@ class SecureStorageService {
     return _instance ??= SecureStorageService();
   }
 
-  static const String tokenData = " tokenData";
-  static const String themeModeKey = 'themeModeKey';
-  static const String deviceToken = 'deviceToken';
-
   Future<void> setValue(String key, String? value) async {
     await _storage.write(key: key, value: value);
   }

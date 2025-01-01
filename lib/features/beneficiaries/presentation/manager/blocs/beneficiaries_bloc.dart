@@ -19,9 +19,11 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
   FutureOr<void> _getBeneficiaries(
       getBeneficiariesEvent event, Emitter<ParentState> emit) async {
     // in case of loading
-    if (event.isFiringFromDelete == false)
+    if (event.showOverlayLoading == true)
       emit(state.copyWith(showOverlayLoading: true)..status = Status.success);
-
+    else {
+      emit(state.copyWith(showOverlayLoading: false)..status = Status.loading);
+    }
     // if (event.isFiringFromDelete == false)
     await Future.delayed(Duration(seconds: 1));
 
@@ -66,7 +68,7 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
         AppToast.showToast(failure.toErrorModel().message);
       },
       (ApiResponseModel result) {
-        add(getBeneficiariesEvent());
+        add(getBeneficiariesEvent(showOverlayLoading: true));
       },
     );
   }
@@ -78,12 +80,12 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
     emit(state.copyWith(showOverlayLoading: true)..status = Status.success);
     result.fold(
       (failure) {
-        emit(state.copyWith(showOverlayLoading: false)
-          ..status = Status.error
-          ..errorMessage = failure.toErrorModel().message);
+        emit(
+            state.copyWith(showOverlayLoading: false)..status = Status.success);
+        AppToast.showToast(failure.toErrorModel().message);
       },
       (ApiResponseModel result) {
-        add(getBeneficiariesEvent(isFiringFromDelete: true));
+        add(getBeneficiariesEvent(showOverlayLoading: true));
       },
     );
   }
