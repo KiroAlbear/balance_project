@@ -29,22 +29,27 @@ class _BeneficiariesPageState extends BaseState<BeneficiariesPage> {
       backgroundColor: Colors.white,
       context: context,
       builder: (context) {
-        return SizedBox(
-          height: 500,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              20.flexPaddingHeight,
-              Text(
-                "Add Beneficiary",
-                textAlign: TextAlign.center,
-                style: CustomTextStyles.bold_20_black_appbarText(context),
-              ),
-              20.flexPaddingHeight,
-              AddBeneficirayForm(itemsCount: _beneficiariesCount)
-            ],
-          ),
+        return CustomBottomSheet(
+          title: "Add Beneficiary",
+          bottomSheetHeight: 500,
+          child: AddBeneficirayForm(itemsCount: _beneficiariesCount),
         );
+        // return SizedBox(
+        //   height: 500,
+        //   child: Column(
+        //     crossAxisAlignment: CrossAxisAlignment.stretch,
+        //     children: [
+        //       20.flexPaddingHeight,
+        //       Text(
+        //         "Add Beneficiary",
+        //         textAlign: TextAlign.center,
+        //         style: CustomTextStyles.bold_20_black_appbarText(context),
+        //       ),
+        //       20.flexPaddingHeight,
+        //       AddBeneficirayForm(itemsCount: _beneficiariesCount)
+        //     ],
+        //   ),
+        // );
       },
     );
   }

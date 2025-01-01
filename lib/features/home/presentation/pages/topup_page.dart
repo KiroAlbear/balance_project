@@ -73,21 +73,10 @@ class TopupPage extends BaseStatelessPage {
       backgroundColor: Colors.white,
       context: context,
       builder: (context) {
-        return SizedBox(
-          height: _bottomSheetHeight,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              20.flexPaddingHeight,
-              Text(
-                "Select Amount",
-                textAlign: TextAlign.center,
-                style: CustomTextStyles.bold_20_black_appbarText(context),
-              ),
-              20.flexPaddingHeight,
-              Expanded(child: _buildAmountList(state)),
-            ],
-          ),
+        return CustomBottomSheet(
+          title: "Select Amount",
+          bottomSheetHeight: _bottomSheetHeight,
+          child: _buildAmountList(state),
         );
       },
     );
@@ -101,21 +90,10 @@ class TopupPage extends BaseStatelessPage {
       backgroundColor: Colors.white,
       context: context,
       builder: (context) {
-        return SizedBox(
-          height: _bottomSheetHeight,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              20.flexPaddingHeight,
-              Text(
-                "Select Beneficiary",
-                textAlign: TextAlign.center,
-                style: CustomTextStyles.bold_20_black_appbarText(context),
-              ),
-              20.flexPaddingHeight,
-              _buildBeneficiariesList(state),
-            ],
-          ),
+        return CustomBottomSheet(
+          title: "Select Beneficiary",
+          bottomSheetHeight: _bottomSheetHeight,
+          child: _buildBeneficiariesList(state),
         );
       },
     );

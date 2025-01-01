@@ -42,6 +42,7 @@ export 'core/utils/common_utils.dart';
 export 'core/utils/date_utils.dart';
 export 'core/widgets/app_toaster.dart';
 export 'core/widgets/custom_appbar.dart';
+export 'core/widgets/custom_bottom_sheet.dart';
 export 'core/widgets/custom_elevated_button.dart';
 export 'core/widgets/custom_gradient_button.dart';
 export 'core/widgets/custom_inkwell.dart';
