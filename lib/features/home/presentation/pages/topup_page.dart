@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TopupPage extends BaseStatelessPage {
+  final _bottomSheetHeight = 500.0;
   const TopupPage({super.key});
 
   @override
@@ -37,6 +38,61 @@ class TopupPage extends BaseStatelessPage {
     );
   }
 
+  Widget _buildAmountList(BeneficiariesState state) {
+    if (state.amounts == null) {
+      return SizedBox();
+    }
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 12.0),
+      child: ListView.separated(
+        shrinkWrap: true,
+        separatorBuilder: (context, index) {
+          return 12.flexPaddingHeight;
+        },
+        itemCount: state.amounts!.length,
+        itemBuilder: (context, index) {
+          return AmountItem(
+            value: state.amounts![index].amount,
+            index: index,
+            onTap: (int index) {
+              BlocProvider.of<BeneficiariesBloc>(context)
+                  .add(selectAmountEvent(selectedIndex: index));
+              Navigator.pop(context);
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  void _showSelectAmountBottomSheet(
+      BuildContext context, BeneficiariesState state) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      useSafeArea: true,
+      backgroundColor: Colors.white,
+      context: context,
+      builder: (context) {
+        return SizedBox(
+          height: _bottomSheetHeight,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              20.flexPaddingHeight,
+              Text(
+                "Select Amount",
+                textAlign: TextAlign.center,
+                style: CustomTextStyles.bold_20_black_appbarText(context),
+              ),
+              20.flexPaddingHeight,
+              Expanded(child: _buildAmountList(state)),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   void _showSelectBeneficiariesBottomSheet(
       BuildContext context, BeneficiariesState state) {
     showModalBottomSheet(
@@ -46,7 +102,7 @@ class TopupPage extends BaseStatelessPage {
       context: context,
       builder: (context) {
         return SizedBox(
-          height: 500,
+          height: _bottomSheetHeight,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -71,6 +127,9 @@ class TopupPage extends BaseStatelessPage {
       onPopInvoked: (val) {
         BlocProvider.of<BeneficiariesBloc>(context)
             .add(selectBeneficiaryEvent(selectedIndex: -1));
+
+        BlocProvider.of<BeneficiariesBloc>(context)
+            .add(selectAmountEvent(selectedIndex: -1));
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,10 +168,33 @@ class TopupPage extends BaseStatelessPage {
             'Amount Details',
             style: CustomTextStyles.regular_14_black(context),
           ),
-          ChooseBeneficiaryCard(
-            text: 'Select Amount',
-            onTap: () {},
+
+          BlocBuilder<BeneficiariesBloc, BeneficiariesState>(
+            builder: (context, BeneficiariesState state) {
+              if (state.selectedAmountIndex == -1) {
+                return ChooseBeneficiaryCard(
+                  text: 'Select Amount',
+                  onTap: () {
+                    _showSelectAmountBottomSheet(context, state);
+                  },
+                );
+              } else {
+                return AmountItem(
+                  value: state.amounts![state.selectedAmountIndex].amount,
+                  index: state.selectedAmountIndex,
+                  onTap: (int index) {
+                    _showSelectAmountBottomSheet(context, state);
+                  },
+                );
+              }
+            },
           ),
+
+          // AmountItem(value: "EGP 100", index: 2),
+          // ChooseBeneficiaryCard(
+          //   text: 'Select Amount',
+          //   onTap: () {},
+          // ),
           20.flexPaddingHeight,
           LineSeparatorWidget(
             paddingHeight: AppDimensions.h(10),

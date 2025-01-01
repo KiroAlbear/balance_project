@@ -15,7 +15,19 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
     on<addBeneficiaryEvent>(_addBeneficiary);
     on<deleteBeneficiaryEvent>(_deleteBeneficiary);
     on<selectBeneficiaryEvent>(_seleteBeneficiary);
+    on<getAmountEvent>(_getAmount);
+    on<selectAmountEvent>(_seleteAmount);
   }
+
+  final List<AmountModel> amounts = [
+    AmountModel(amount: 5),
+    AmountModel(amount: 10),
+    AmountModel(amount: 20),
+    AmountModel(amount: 30),
+    AmountModel(amount: 50),
+    AmountModel(amount: 75),
+    AmountModel(amount: 100),
+  ];
 
   FutureOr<void> _getBeneficiaries(
       getBeneficiariesEvent event, Emitter<ParentState> emit) async {
@@ -94,8 +106,18 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
 
   FutureOr<void> _seleteBeneficiary(
       selectBeneficiaryEvent event, Emitter<BeneficiariesState> emit) {
+    emit(state.copyWith(selectedBeneficiaryIndex: event.selectedIndex));
+  }
+
+  FutureOr<void> _getAmount(
+      getAmountEvent event, Emitter<BeneficiariesState> emit) {
+    emit(state.copyWith(amounts: amounts));
+  }
+
+  FutureOr<void> _seleteAmount(
+      selectAmountEvent event, Emitter<BeneficiariesState> emit) {
     emit(state.copyWith(
-        selectedBeneficiaryIndex: event.selectedIndex,
-        isListChanged: !state.isListChanged));
+      selectedAmountIndex: event.selectedIndex,
+    ));
   }
 }

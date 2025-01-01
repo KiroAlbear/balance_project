@@ -9,9 +9,13 @@ part of 'beneficiaries_state.dart';
 abstract class _$BeneficiariesStateCWProxy {
   BeneficiariesState beneficiaries(List<BeneficiariesModel>? beneficiaries);
 
+  BeneficiariesState amounts(List<AmountModel>? amounts);
+
   BeneficiariesState showOverlayLoading(bool showOverlayLoading);
 
   BeneficiariesState selectedBeneficiaryIndex(int selectedBeneficiaryIndex);
+
+  BeneficiariesState selectedAmountIndex(int selectedAmountIndex);
 
   BeneficiariesState isListChanged(bool isListChanged);
 
@@ -23,8 +27,10 @@ abstract class _$BeneficiariesStateCWProxy {
   /// ````
   BeneficiariesState call({
     List<BeneficiariesModel>? beneficiaries,
+    List<AmountModel>? amounts,
     bool? showOverlayLoading,
     int? selectedBeneficiaryIndex,
+    int? selectedAmountIndex,
     bool? isListChanged,
   });
 }
@@ -40,12 +46,20 @@ class _$BeneficiariesStateCWProxyImpl implements _$BeneficiariesStateCWProxy {
       this(beneficiaries: beneficiaries);
 
   @override
+  BeneficiariesState amounts(List<AmountModel>? amounts) =>
+      this(amounts: amounts);
+
+  @override
   BeneficiariesState showOverlayLoading(bool showOverlayLoading) =>
       this(showOverlayLoading: showOverlayLoading);
 
   @override
   BeneficiariesState selectedBeneficiaryIndex(int selectedBeneficiaryIndex) =>
       this(selectedBeneficiaryIndex: selectedBeneficiaryIndex);
+
+  @override
+  BeneficiariesState selectedAmountIndex(int selectedAmountIndex) =>
+      this(selectedAmountIndex: selectedAmountIndex);
 
   @override
   BeneficiariesState isListChanged(bool isListChanged) =>
@@ -61,8 +75,10 @@ class _$BeneficiariesStateCWProxyImpl implements _$BeneficiariesStateCWProxy {
   /// ````
   BeneficiariesState call({
     Object? beneficiaries = const $CopyWithPlaceholder(),
+    Object? amounts = const $CopyWithPlaceholder(),
     Object? showOverlayLoading = const $CopyWithPlaceholder(),
     Object? selectedBeneficiaryIndex = const $CopyWithPlaceholder(),
+    Object? selectedAmountIndex = const $CopyWithPlaceholder(),
     Object? isListChanged = const $CopyWithPlaceholder(),
   }) {
     return BeneficiariesState(
@@ -70,6 +86,10 @@ class _$BeneficiariesStateCWProxyImpl implements _$BeneficiariesStateCWProxy {
           ? _value.beneficiaries
           // ignore: cast_nullable_to_non_nullable
           : beneficiaries as List<BeneficiariesModel>?,
+      amounts: amounts == const $CopyWithPlaceholder()
+          ? _value.amounts
+          // ignore: cast_nullable_to_non_nullable
+          : amounts as List<AmountModel>?,
       showOverlayLoading: showOverlayLoading == const $CopyWithPlaceholder() ||
               showOverlayLoading == null
           ? _value.showOverlayLoading
@@ -81,6 +101,12 @@ class _$BeneficiariesStateCWProxyImpl implements _$BeneficiariesStateCWProxy {
               ? _value.selectedBeneficiaryIndex
               // ignore: cast_nullable_to_non_nullable
               : selectedBeneficiaryIndex as int,
+      selectedAmountIndex:
+          selectedAmountIndex == const $CopyWithPlaceholder() ||
+                  selectedAmountIndex == null
+              ? _value.selectedAmountIndex
+              // ignore: cast_nullable_to_non_nullable
+              : selectedAmountIndex as int,
       isListChanged:
           isListChanged == const $CopyWithPlaceholder() || isListChanged == null
               ? _value.isListChanged

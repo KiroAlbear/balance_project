@@ -14,6 +14,21 @@ class getBeneficiariesEvent extends BeneficiariesEvent {
   List<Object> get props => <Object>[];
 }
 
+class getAmountEvent extends BeneficiariesEvent {
+  const getAmountEvent();
+
+  @override
+  List<Object> get props => <Object>[];
+}
+
+class selectAmountEvent extends BeneficiariesEvent {
+  final int selectedIndex;
+  const selectAmountEvent({required this.selectedIndex});
+
+  @override
+  List<Object> get props => <Object>[selectedIndex];
+}
+
 class addBeneficiaryEvent extends BeneficiariesEvent {
   final String name;
   final String phoneNumber;

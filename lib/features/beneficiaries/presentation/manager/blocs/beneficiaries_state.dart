@@ -6,12 +6,16 @@ part 'beneficiaries_state.g.dart';
 @CopyWith()
 class BeneficiariesState extends ParentState {
   List<BeneficiariesModel>? beneficiaries;
+  List<AmountModel>? amounts;
+  int selectedAmountIndex;
   int selectedBeneficiaryIndex;
   bool isListChanged = false;
   bool showOverlayLoading;
   BeneficiariesState(
       {this.beneficiaries,
+      this.amounts,
       this.showOverlayLoading = false,
       this.selectedBeneficiaryIndex = -1,
+      this.selectedAmountIndex = -1,
       this.isListChanged = false});
 }
