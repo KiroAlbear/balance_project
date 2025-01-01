@@ -7,6 +7,9 @@ part 'beneficiaries_state.g.dart';
 class BeneficiariesState extends ParentState {
   List<BeneficiariesModel>? beneficiaries;
   bool isListChanged = false;
-
-  BeneficiariesState({this.beneficiaries, this.isListChanged = false});
+  bool showOverlayLoading;
+  BeneficiariesState(
+      {this.beneficiaries,
+      this.showOverlayLoading = false,
+      this.isListChanged = false});
 }

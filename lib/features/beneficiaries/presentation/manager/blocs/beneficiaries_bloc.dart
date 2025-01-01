@@ -20,26 +20,29 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
       getBeneficiariesEvent event, Emitter<ParentState> emit) async {
     // in case of loading
     if (event.isFiringFromDelete == false)
-      emit(state.copyWith()..status = Status.loading);
+      emit(state.copyWith(showOverlayLoading: true)..status = Status.success);
 
-    if (event.isFiringFromDelete == false)
-      await Future.delayed(Duration(seconds: 1));
+    // if (event.isFiringFromDelete == false)
+    await Future.delayed(Duration(seconds: 1));
 
     Either<Failure, List<BeneficiariesModel>> result =
         await beneficiariesUseCase.call(NoParams());
 
     result.fold(
       (failure) {
-        emit(state.copyWith()
+        emit(state.copyWith(showOverlayLoading: false)
           ..status = Status.error
           ..errorMessage = failure.toErrorModel().message);
       },
       (List<BeneficiariesModel> beneficiaries) {
         if (beneficiaries.isEmpty)
-          emit(state.copyWith()..status = Status.empty);
+          emit(
+              state.copyWith(showOverlayLoading: false)..status = Status.empty);
         else {
           emit(state.copyWith(
-              beneficiaries: beneficiaries, isListChanged: !state.isListChanged)
+              showOverlayLoading: false,
+              beneficiaries: beneficiaries,
+              isListChanged: !state.isListChanged)
             ..status = Status.success);
         }
       },
@@ -48,7 +51,9 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
 
   FutureOr<void> _addBeneficiary(
       addBeneficiaryEvent event, Emitter<BeneficiariesState> emit) async {
-    emit(state.copyWith()..status = Status.loading);
+    emit(state.copyWith(
+        showOverlayLoading: true, isListChanged: !state.isListChanged)
+      ..status = Status.success);
 
     Either<Failure, ApiResponseModel> result = await addBeneficiaryUseCase.call(
         AddBeneficiaryUseCaseParams(
@@ -56,7 +61,8 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
 
     result.fold(
       (failure) {
-        emit(state.copyWith()..status = Status.success);
+        emit(
+            state.copyWith(showOverlayLoading: false)..status = Status.success);
         AppToast.showToast(failure.toErrorModel().message);
       },
       (ApiResponseModel result) {
@@ -69,10 +75,10 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
       deleteBeneficiaryEvent event, Emitter<BeneficiariesState> emit) async {
     Either<Failure, ApiResponseModel> result = await deleteBeneficiaryUseCase
         .call(DeleteBeneficiaryUseCaseParams(phoneNumber: event.phoneNumber));
-
+    emit(state.copyWith(showOverlayLoading: true)..status = Status.success);
     result.fold(
       (failure) {
-        emit(state.copyWith()
+        emit(state.copyWith(showOverlayLoading: false)
           ..status = Status.error
           ..errorMessage = failure.toErrorModel().message);
       },

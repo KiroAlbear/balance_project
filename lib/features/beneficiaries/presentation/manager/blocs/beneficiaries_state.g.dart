@@ -9,6 +9,8 @@ part of 'beneficiaries_state.dart';
 abstract class _$BeneficiariesStateCWProxy {
   BeneficiariesState beneficiaries(List<BeneficiariesModel>? beneficiaries);
 
+  BeneficiariesState showOverlayLoading(bool showOverlayLoading);
+
   BeneficiariesState isListChanged(bool isListChanged);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `BeneficiariesState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
@@ -19,6 +21,7 @@ abstract class _$BeneficiariesStateCWProxy {
   /// ````
   BeneficiariesState call({
     List<BeneficiariesModel>? beneficiaries,
+    bool? showOverlayLoading,
     bool? isListChanged,
   });
 }
@@ -34,6 +37,10 @@ class _$BeneficiariesStateCWProxyImpl implements _$BeneficiariesStateCWProxy {
       this(beneficiaries: beneficiaries);
 
   @override
+  BeneficiariesState showOverlayLoading(bool showOverlayLoading) =>
+      this(showOverlayLoading: showOverlayLoading);
+
+  @override
   BeneficiariesState isListChanged(bool isListChanged) =>
       this(isListChanged: isListChanged);
 
@@ -47,6 +54,7 @@ class _$BeneficiariesStateCWProxyImpl implements _$BeneficiariesStateCWProxy {
   /// ````
   BeneficiariesState call({
     Object? beneficiaries = const $CopyWithPlaceholder(),
+    Object? showOverlayLoading = const $CopyWithPlaceholder(),
     Object? isListChanged = const $CopyWithPlaceholder(),
   }) {
     return BeneficiariesState(
@@ -54,6 +62,11 @@ class _$BeneficiariesStateCWProxyImpl implements _$BeneficiariesStateCWProxy {
           ? _value.beneficiaries
           // ignore: cast_nullable_to_non_nullable
           : beneficiaries as List<BeneficiariesModel>?,
+      showOverlayLoading: showOverlayLoading == const $CopyWithPlaceholder() ||
+              showOverlayLoading == null
+          ? _value.showOverlayLoading
+          // ignore: cast_nullable_to_non_nullable
+          : showOverlayLoading as bool,
       isListChanged:
           isListChanged == const $CopyWithPlaceholder() || isListChanged == null
               ? _value.isListChanged
