@@ -5,13 +5,7 @@ part 'beneficiaries_state.g.dart';
 
 @CopyWith()
 class BeneficiariesState extends ParentState {
-  int? number = 0;
-  BeneficiariesState({this.number});
-}
+  List<BeneficiariesModel>? beneficiaries;
 
-@CopyWith()
-class BeneficiariesAnotherState extends ParentState {
-  int? number = 0;
-
-  BeneficiariesAnotherState({this.number});
+  BeneficiariesState({this.beneficiaries});
 }

@@ -9,24 +9,13 @@ abstract class ApiUtility {
   }) {
     if (response.statusCode == 200) {
       final ApiResponseModel apiResponse =
-          _handleApiResponseModel(response, customResponseModel);
+          ApiResponseModel.fromJson(json.decode(response.data));
       return _dataConverterHelper<T, B>(
         apiResponseModel: apiResponse,
         responseConverter: responseConverter,
       );
     } else {
       throw ServerException();
-    }
-  }
-
-  ApiResponseModel _handleApiResponseModel(Response<dynamic> response,
-      ApiResponseModel Function(dynamic)? customResponseModel) {
-    try {
-      return customResponseModel != null
-          ? customResponseModel(response.data)
-          : ApiResponseModel.fromJson(json.decode(response.data));
-    } catch (e) {
-      throw DataParsingException(message: e.toString());
     }
   }
 
@@ -41,26 +30,16 @@ abstract class ApiUtility {
       return JsonToListConverter.convertJsonToList<T, B>(
           apiResponseModel, responseConverter);
     } else {
-      Map<String,dynamic> data = Map<String, dynamic>();
-      data['message'] = apiResponseModel.message;
-      return responseConverter(data);
+      return apiResponseModel.data;
     }
-    // } catch (e) {
-    //   throw DataParsingException(message: e.toString());
-    // }
   }
 
   Exception _exceptionHandler(Exception e) {
     if (e is DioException) {
       switch (e.response?.statusCode) {
         case 400:
-          return CustomException(message: [
-            json.decode(e.response?.data)['error'].toString()
-          ]);
-        case 401:
-          return UnauthorizedException();
-        case 429:
-          return TooManyRequestsException();
+          return CustomException(
+              message: [json.decode(e.response?.data)['error'].toString()]);
         default:
           return ServerException();
       }
@@ -68,9 +47,7 @@ abstract class ApiUtility {
 
     if ((e is ServerException) ||
         (e is CustomException) ||
-        (e is DataParsingException) ||
-        (e is UnauthorizedException) ||
-        (e is RefreshTokenExpiredException)) {
+        (e is DataParsingException)) {
       return e;
     } else if (e is FormatException) {
       return DataParsingException(message: 'Data format error');

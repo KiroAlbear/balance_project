@@ -20,8 +20,9 @@ BeneficiariesModel _$BeneficiariesModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BeneficiariesModel {
+  int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
+  String? get phoneNumber => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,7 @@ abstract class $BeneficiariesModelCopyWith<$Res> {
           BeneficiariesModel value, $Res Function(BeneficiariesModel) then) =
       _$BeneficiariesModelCopyWithImpl<$Res, BeneficiariesModel>;
   @useResult
-  $Res call({String? name, String? description});
+  $Res call({int? id, String? name, String? phoneNumber});
 }
 
 /// @nodoc
@@ -51,17 +52,22 @@ class _$BeneficiariesModelCopyWithImpl<$Res, $Val extends BeneficiariesModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
-    Object? description = freezed,
+    Object? phoneNumber = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -75,7 +81,7 @@ abstract class _$$BeneficiariesModelImplCopyWith<$Res>
       __$$BeneficiariesModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? name, String? description});
+  $Res call({int? id, String? name, String? phoneNumber});
 }
 
 /// @nodoc
@@ -89,17 +95,22 @@ class __$$BeneficiariesModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
-    Object? description = freezed,
+    Object? phoneNumber = freezed,
   }) {
     return _then(_$BeneficiariesModelImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -108,19 +119,21 @@ class __$$BeneficiariesModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$BeneficiariesModelImpl implements _BeneficiariesModel {
-  const _$BeneficiariesModelImpl({this.name, this.description});
+  const _$BeneficiariesModelImpl({this.id, this.name, this.phoneNumber});
 
   factory _$BeneficiariesModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$BeneficiariesModelImplFromJson(json);
 
   @override
+  final int? id;
+  @override
   final String? name;
   @override
-  final String? description;
+  final String? phoneNumber;
 
   @override
   String toString() {
-    return 'BeneficiariesModel(name: $name, description: $description)';
+    return 'BeneficiariesModel(id: $id, name: $name, phoneNumber: $phoneNumber)';
   }
 
   @override
@@ -128,14 +141,15 @@ class _$BeneficiariesModelImpl implements _BeneficiariesModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BeneficiariesModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.description, description) ||
-                other.description == description));
+            (identical(other.phoneNumber, phoneNumber) ||
+                other.phoneNumber == phoneNumber));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, description);
+  int get hashCode => Object.hash(runtimeType, id, name, phoneNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -154,16 +168,19 @@ class _$BeneficiariesModelImpl implements _BeneficiariesModel {
 
 abstract class _BeneficiariesModel implements BeneficiariesModel {
   const factory _BeneficiariesModel(
-      {final String? name,
-      final String? description}) = _$BeneficiariesModelImpl;
+      {final int? id,
+      final String? name,
+      final String? phoneNumber}) = _$BeneficiariesModelImpl;
 
   factory _BeneficiariesModel.fromJson(Map<String, dynamic> json) =
       _$BeneficiariesModelImpl.fromJson;
 
   @override
+  int? get id;
+  @override
   String? get name;
   @override
-  String? get description;
+  String? get phoneNumber;
   @override
   @JsonKey(ignore: true)
   _$$BeneficiariesModelImplCopyWith<_$BeneficiariesModelImpl> get copyWith =>

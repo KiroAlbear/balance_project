@@ -11,7 +11,6 @@ class ParentBloc<B extends StateStreamable<S>, S> extends StatelessWidget {
   final Widget? loadingWidget;
   final Widget? emptyWidget;
   final Widget? errorWidget;
-  final Widget? unAuthWidget;
 
   ParentBloc({
     Key? key,
@@ -20,7 +19,6 @@ class ParentBloc<B extends StateStreamable<S>, S> extends StatelessWidget {
     this.buildWhen,
     this.loadingWidget,
     this.emptyWidget,
-    this.unAuthWidget,
     this.errorWidget,
     this.listenWhen,
   }) : super(key: key);
@@ -36,9 +34,6 @@ class ParentBloc<B extends StateStreamable<S>, S> extends StatelessWidget {
       return emptyWidget ?? NoDataErrorWidget();
     } else if ((state as ParentState).status == Status.error) {
       return errorWidget ?? ServerErrorWidget();
-    } else if ((state as ParentState).status == Status.unAuthorized) {
-      return unAuthWidget ??
-          Container(child: Center(child: Text((state as ParentState).message)));
     } else if ((state as ParentState).status != null) {
       return builder(state) ?? SizedBox();
       // return SizedBox()

@@ -1,11 +1,23 @@
 import 'package:balance_project/imports.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BeneficiariesPage extends BaseStatelessPage {
+class BeneficiariesPage extends BaseStatefulPage {
   const BeneficiariesPage({super.key});
 
   @override
+  State<BeneficiariesPage> createState() => _BeneficiariesPageState();
+}
+
+class _BeneficiariesPageState extends BaseState<BeneficiariesPage> {
+  @override
   bool containPadding() => false;
+
+  @override
+  void initState() {
+    BlocProvider.of<BeneficiariesBloc>(context).add(getBeneficiariesEvent());
+    super.initState();
+  }
 
   @override
   Widget body(BuildContext context) {
@@ -34,15 +46,21 @@ class BeneficiariesPage extends BaseStatelessPage {
                 style: CustomTextStyles.bold_20_black_appbarText(context),
               ),
               20.flexPaddingHeight,
-              BeneficiaryItem(
-                name: "Ahmed",
-                phone: "01000000000",
-              ),
-              20.flexPaddingHeight,
-              BeneficiaryItem(
-                name: "John",
-                phone: "01012344000",
-              ),
+              ParentBloc<BeneficiariesBloc, BeneficiariesState>(
+                  builder: (BeneficiariesState state) {
+                return ListView.separated(
+                  shrinkWrap: true,
+                  separatorBuilder: (context, index) {
+                    return 12.flexPaddingHeight;
+                  },
+                  itemCount: state.beneficiaries!.length,
+                  itemBuilder: (context, index) {
+                    return BeneficiaryItem(
+                        name: state.beneficiaries![index].name!,
+                        phone: state.beneficiaries![index].phoneNumber!);
+                  },
+                );
+              })
             ],
           )),
     );

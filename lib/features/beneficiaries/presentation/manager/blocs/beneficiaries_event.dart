@@ -7,9 +7,8 @@ abstract class BeneficiariesEvent extends Equatable {
 }
 
 class getBeneficiariesEvent extends BeneficiariesEvent {
-  final int number;
-  const getBeneficiariesEvent(this.number);
+  const getBeneficiariesEvent();
 
   @override
-  List<Object> get props => <Object>[number];
+  List<Object> get props => <Object>[];
 }

@@ -6,7 +6,7 @@ class BeneficiariesRepoImp implements BeneficiariesRepo {
   BeneficiariesRepoImp(this._dataSource);
 
   @override
-  Future<Either<Failure, BeneficiariesModel>> getBeneficiaries() async {
+  Future<Either<Failure, List<BeneficiariesModel>>> getBeneficiaries() async {
     return _dataSource.getBeneficiaries();
   }
 }

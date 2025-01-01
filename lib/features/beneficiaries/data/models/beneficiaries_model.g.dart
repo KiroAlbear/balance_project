@@ -9,13 +9,15 @@ part of 'beneficiaries_model.dart';
 _$BeneficiariesModelImpl _$$BeneficiariesModelImplFromJson(
         Map<String, dynamic> json) =>
     _$BeneficiariesModelImpl(
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
-      description: json['description'] as String?,
+      phoneNumber: json['phoneNumber'] as String?,
     );
 
 Map<String, dynamic> _$$BeneficiariesModelImplToJson(
         _$BeneficiariesModelImpl instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'name': instance.name,
-      'description': instance.description,
+      'phoneNumber': instance.phoneNumber,
     };

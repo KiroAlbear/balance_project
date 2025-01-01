@@ -5,9 +5,10 @@ import 'package:balance_project/imports.dart';
 class ParentState {
   Status? status = Status.loading;
   Status savingStatus;
-
-  String message;
+  String errorMessage;
 
   ParentState(
-      {this.status, this.savingStatus = Status.initial, this.message = ""});
+      {this.status,
+      this.savingStatus = Status.initial,
+      this.errorMessage = ""});
 }

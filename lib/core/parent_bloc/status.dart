@@ -4,5 +4,4 @@ enum Status {
   success,
   empty,
   error,
-  unAuthorized,
 }

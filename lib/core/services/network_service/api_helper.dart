@@ -10,11 +10,8 @@ part 'api_utility.dart';
 abstract class ApiHelper extends ApiUtility {
   Future<Either<Failure, T>> postData<T>(
     String path, {
-    bool authorizedApi = false,
-    ApiResponseModel Function(dynamic)? customResponseModel,
     Map<String, dynamic>? body,
     Function(String)? onResponse,
-    FormData? formDataBody,
     required T Function(Map<String, dynamic> json) responseConverter,
     Type? listType,
   }) async {
@@ -25,8 +22,6 @@ abstract class ApiHelper extends ApiUtility {
               await ApiService.getInstance().post(
             path,
             body: body,
-            authorizedApi: authorizedApi,
-            formDataBody: formDataBody,
           );
 
           if (onResponse != null) {
@@ -35,7 +30,6 @@ abstract class ApiHelper extends ApiUtility {
 
           return _handleStatusCode(
             response: response,
-            customResponseModel: customResponseModel,
             responseConverter: responseConverter,
           );
         } catch (error) {
@@ -44,93 +38,6 @@ abstract class ApiHelper extends ApiUtility {
           throw exception;
         }
       },
-      refreshTokenCall: authorizedApi
-          ? () async => await TokenDataSource.refreshToken()
-          : null,
-    );
-  }
-
-  Future<Either<Failure, T>> patch<T>(
-    String path, {
-    bool authorizedApi = false,
-    ApiResponseModel Function(dynamic)? customResponseModel,
-    Map<String, dynamic>? body,
-    Function(String)? onResponse,
-    FormData? formDataBody,
-    required T Function(Map<String, dynamic> json) responseConverter,
-    Type? listType,
-  }) async {
-    return _executeApiCall<T>(
-      () async {
-        try {
-          final Response<dynamic> response =
-              await ApiService.getInstance().patch(
-            path,
-            body: body,
-            authorizedApi: authorizedApi,
-            formDataBody: formDataBody,
-          );
-
-          if (onResponse != null) {
-            onResponse(response.data);
-          }
-
-          return _handleStatusCode(
-            response: response,
-            customResponseModel: customResponseModel,
-            responseConverter: responseConverter,
-          );
-        } catch (error) {
-          LoggerService.logError(error.toString());
-          Exception exception = _exceptionHandler(error as Exception);
-          throw exception;
-        }
-      },
-      refreshTokenCall: authorizedApi
-          ? () async => await TokenDataSource.refreshToken()
-          : null,
-    );
-  }
-
-  Future<Either<Failure, T>> delete<T>(
-    String path, {
-    bool authorizedApi = false,
-    ApiResponseModel Function(dynamic)? customResponseModel,
-    Map<String, dynamic>? body,
-    Function(String)? onResponse,
-    FormData? formDataBody,
-    required T Function(Map<String, dynamic> json) responseConverter,
-    Type? listType,
-  }) async {
-    return _executeApiCall<T>(
-      () async {
-        try {
-          final Response<dynamic> response =
-              await ApiService.getInstance().delete(
-            path,
-            body: body,
-            authorizedApi: authorizedApi,
-            formDataBody: formDataBody,
-          );
-
-          if (onResponse != null) {
-            onResponse(response.data);
-          }
-
-          return _handleStatusCode(
-            response: response,
-            customResponseModel: customResponseModel,
-            responseConverter: responseConverter,
-          );
-        } catch (error) {
-          LoggerService.logError(error.toString());
-          Exception exception = _exceptionHandler(error as Exception);
-          throw exception;
-        }
-      },
-      refreshTokenCall: authorizedApi
-          ? () async => await TokenDataSource.refreshToken()
-          : null,
     );
   }
 
@@ -147,7 +54,6 @@ abstract class ApiHelper extends ApiUtility {
         try {
           final Response<dynamic> response = await ApiService.getInstance().get(
             path,
-            authorizedApi: authorizedApi,
             body: body,
           );
 
@@ -166,28 +72,14 @@ abstract class ApiHelper extends ApiUtility {
           throw exception;
         }
       },
-      refreshTokenCall: authorizedApi
-          ? () async => await TokenDataSource.refreshToken()
-          : null,
     );
   }
 
   Future<Either<Failure, T>> _executeApiCall<T>(
-    Future<T> Function() apiCall, {
-    Future<void> Function()? refreshTokenCall,
-  }) async {
+      Future<T> Function() apiCall) async {
     try {
       T data = await apiCall();
       return right(data);
-    } on UnauthorizedException {
-      if (refreshTokenCall != null) {
-        await refreshTokenCall();
-        T data = await apiCall();
-        return right(data);
-      }
-      return const Left<Failure, Never>(UnAuthorizedFailure());
-    } on RefreshTokenExpiredException {
-      return const Left<Failure, Never>(RefreshTokenExpiredFailure());
     } on ServerException {
       return const Left<Failure, Never>(ServerFailure());
     } on DataParsingException catch (e) {
