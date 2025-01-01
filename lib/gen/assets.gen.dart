@@ -31,6 +31,10 @@ class $AssetsImagesPngGen {
   /// File path: assets/images/png/cross.png
   AssetGenImage get cross => const AssetGenImage('assets/images/png/cross.png');
 
+  /// File path: assets/images/png/empty_list.png
+  AssetGenImage get emptyList =>
+      const AssetGenImage('assets/images/png/empty_list.png');
+
   /// File path: assets/images/png/ic_launcher.png
   AssetGenImage get icLauncher =>
       const AssetGenImage('assets/images/png/ic_launcher.png');
@@ -40,7 +44,8 @@ class $AssetsImagesPngGen {
       const AssetGenImage('assets/images/png/verified.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [check, cross, icLauncher, verified];
+  List<AssetGenImage> get values =>
+      [check, cross, emptyList, icLauncher, verified];
 }
 
 class $AssetsImagesSvgGen {

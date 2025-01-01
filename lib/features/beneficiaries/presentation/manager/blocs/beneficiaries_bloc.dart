@@ -19,9 +19,11 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
   FutureOr<void> _getBeneficiaries(
       getBeneficiariesEvent event, Emitter<ParentState> emit) async {
     // in case of loading
-    emit(state.copyWith()..status = Status.loading);
+    if (event.isFiringFromDelete == false)
+      emit(state.copyWith()..status = Status.loading);
 
-    await Future.delayed(Duration(seconds: 1));
+    if (event.isFiringFromDelete == false)
+      await Future.delayed(Duration(seconds: 1));
 
     Either<Failure, List<BeneficiariesModel>> result =
         await beneficiariesUseCase.call(NoParams());
@@ -33,8 +35,12 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
           ..errorMessage = failure.toErrorModel().message);
       },
       (List<BeneficiariesModel> beneficiaries) {
-        emit(state.copyWith(beneficiaries: beneficiaries)
-          ..status = Status.success);
+        if (beneficiaries.isEmpty)
+          emit(state.copyWith()..status = Status.empty);
+        else {
+          emit(state.copyWith(beneficiaries: beneficiaries)
+            ..status = Status.success);
+        }
       },
     );
   }
@@ -70,7 +76,7 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
           ..errorMessage = failure.toErrorModel().message);
       },
       (ApiResponseModel result) {
-        add(getBeneficiariesEvent());
+        add(getBeneficiariesEvent(isFiringFromDelete: true));
       },
     );
   }

@@ -7,7 +7,8 @@ abstract class BeneficiariesEvent extends Equatable {
 }
 
 class getBeneficiariesEvent extends BeneficiariesEvent {
-  const getBeneficiariesEvent();
+  final bool isFiringFromDelete;
+  const getBeneficiariesEvent({this.isFiringFromDelete = false});
 
   @override
   List<Object> get props => <Object>[];
