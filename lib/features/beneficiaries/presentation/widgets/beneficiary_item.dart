@@ -1,5 +1,6 @@
 import 'package:balance_project/imports.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BeneficiaryItem extends StatelessWidget {
   final String name;
@@ -49,7 +50,10 @@ class BeneficiaryItem extends StatelessWidget {
               ],
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                BlocProvider.of<BeneficiariesBloc>(context)
+                    .add(deleteBeneficiaryEvent(phoneNumber: phone));
+              },
               icon: Icon(
                 Icons.delete,
                 color: Colors.red[400],

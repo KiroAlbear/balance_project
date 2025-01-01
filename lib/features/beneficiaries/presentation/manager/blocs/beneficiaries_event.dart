@@ -21,3 +21,11 @@ class addBeneficiaryEvent extends BeneficiariesEvent {
   @override
   List<Object> get props => <Object>[name, phoneNumber];
 }
+
+class deleteBeneficiaryEvent extends BeneficiariesEvent {
+  final String phoneNumber;
+  const deleteBeneficiaryEvent({required this.phoneNumber});
+
+  @override
+  List<Object> get props => <Object>[phoneNumber];
+}

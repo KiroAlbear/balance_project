@@ -12,6 +12,10 @@ class Urls {
     return '$baseUrl/deleteAllUsers';
   }
 
+  static String get deleteOneBeneficiary {
+    return '$baseUrl/deleteOneUser';
+  }
+
   static String get addBeneficiary {
     return '$baseUrl/registerUser';
   }

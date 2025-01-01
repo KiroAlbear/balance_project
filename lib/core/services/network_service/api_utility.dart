@@ -38,7 +38,7 @@ abstract class ApiUtility {
       switch (e.response?.statusCode) {
         case 400:
           return CustomException(
-              message: [json.decode(e.response?.data)['error'].toString()]);
+              message: [json.decode(e.response?.data)['details'].toString()]);
         default:
           return ServerException();
       }

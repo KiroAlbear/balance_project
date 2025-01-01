@@ -9,6 +9,7 @@ class ProvidersService {
         create: (_) => BeneficiariesBloc(
           getIt(),
           getIt(),
+          getIt(),
         ),
       ),
     ];

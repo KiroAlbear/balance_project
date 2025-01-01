@@ -75,6 +75,7 @@ dependencies:
   draggable_scrollbar: ^0.1.0
   fleather: ^1.19.0
   curved_labeled_navigation_bar: ^2.0.5
+  loading_animation_widget: ^1.3.0
 index_generator:
   exclude:
     - '**.g.dart'

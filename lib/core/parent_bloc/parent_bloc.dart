@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../imports.dart';
 
@@ -26,10 +27,16 @@ class ParentBloc<B extends StateStreamable<S>, S> extends StatelessWidget {
   Widget _buildMainWidget(BuildContext context, S state) {
     if ((state as ParentState).status == Status.initial) {
       return loadingWidget ??
-          Container(child: Center(child: CircularProgressIndicator()));
+          Container(
+              child: Center(
+                  child: LoadingAnimationWidget.staggeredDotsWave(
+                      color: StaticColors.themeColor, size: 50)));
     } else if (((state as ParentState).status == Status.loading)) {
       return loadingWidget ??
-          Container(child: Center(child: CircularProgressIndicator()));
+          Container(
+              child: Center(
+                  child: LoadingAnimationWidget.staggeredDotsWave(
+                      color: StaticColors.themeColor, size: 50)));
     } else if ((state as ParentState).status == Status.empty) {
       return emptyWidget ?? NoDataErrorWidget();
     } else if ((state as ParentState).status == Status.error) {
