@@ -1,4 +1,3 @@
-import 'package:balance_project/core/widgets/custom_appbar.dart';
 import 'package:balance_project/imports.dart';
 import 'package:flutter/material.dart';
 
@@ -13,17 +12,12 @@ class TopupPage extends BaseStatelessPage {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        10.flexPaddingHeight,
-        // Text(
-        //   'Payment Details',
-        //   style: CustomTextStyles.bold_20_black_appbarText(context),
-        // ),
-        12.flexPaddingHeight,
+        22.flexPaddingHeight,
         Text(
           'Beneficiaries Details',
           style: CustomTextStyles.regular_14_black(context),
         ),
-        ChooseBeneficiaryCard(
+        const ChooseBeneficiaryCard(
           text: 'Select Beneficiary',
         ),
         12.flexPaddingHeight,
@@ -31,16 +25,16 @@ class TopupPage extends BaseStatelessPage {
           'Amount Details',
           style: CustomTextStyles.regular_14_black(context),
         ),
-        ChooseBeneficiaryCard(
+        const ChooseBeneficiaryCard(
           text: 'Select Amount',
         ),
         20.flexPaddingHeight,
         LineSeparatorWidget(
           paddingHeight: AppDimensions.h(10),
         ),
-        CostRow(title: "Transaction Amount", cost: "10"),
-        CostRow(title: "Transaction Fees", cost: "2"),
-        LineSeparatorWidget(
+        const CostRow(title: "Transaction Amount", cost: "10"),
+        const CostRow(title: "Transaction Fees", cost: "2"),
+        const LineSeparatorWidget(
           paddingHeight: 10,
         ),
         25.flexPaddingHeight,

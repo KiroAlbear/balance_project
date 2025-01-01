@@ -60,7 +60,7 @@ class AvailableBalanceWidget extends StatelessWidget {
                       style: CustomTextStyles.regular_14_white(context)
                           .copyWith(height: 1.5),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     BlocBuilder<HomeBloc, HomeState>(
@@ -88,12 +88,12 @@ class AvailableBalanceWidget extends StatelessWidget {
                   _showEditBalanceBottomSheet(context);
                 },
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.black,
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Icon(
                       Icons.edit,
                       color: Colors.white,

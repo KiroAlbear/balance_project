@@ -33,11 +33,13 @@ class HomeEditBalanceWidget extends StatelessWidget {
                 ),
                 onPressed: () {
                   _formKey.currentState!.validate();
+
                   // check if the balance is valid integer
                   if (_balanceController.text.isNotEmpty &&
                       CommonUtils.isValidInteger(_balanceController.text)) {
                     LoggerService.logDebug(
                         "Balance is valid integer: ${int.parse(_balanceController.text)}");
+
                     BlocProvider.of<HomeBloc>(context)
                         .add(addHomeBalanceEvent(_balanceController.text));
 

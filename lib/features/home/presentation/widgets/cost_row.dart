@@ -9,7 +9,7 @@ class CostRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.only(end: 0, bottom: 10),
+      padding: const EdgeInsetsDirectional.only(end: 0, bottom: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
