@@ -22,37 +22,41 @@ class _BeneficiariesPageState extends BaseState<BeneficiariesPage> {
     super.initState();
   }
 
-  Widget _buildFloatingButton() {
-    return FloatingActionButton(
-      shape: CircleBorder(),
-      backgroundColor: StaticColors.themeColor,
-      onPressed: () {
-        showModalBottomSheet(
-          isScrollControlled: true,
-          useSafeArea: true,
-          backgroundColor: Colors.white,
-          context: context,
-          builder: (context) {
-            return SizedBox(
-              height: 500,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  20.flexPaddingHeight,
-                  Text(
-                    "Add Beneficiary",
-                    textAlign: TextAlign.center,
-                    style: CustomTextStyles.bold_20_black_appbarText(context),
-                  ),
-                  20.flexPaddingHeight,
-                  AddBeneficirayForm(itemsCount: _beneficiariesCount)
-                ],
+  void _showAddBeneficirayBottomSheet() {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      useSafeArea: true,
+      backgroundColor: Colors.white,
+      context: context,
+      builder: (context) {
+        return SizedBox(
+          height: 500,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              20.flexPaddingHeight,
+              Text(
+                "Add Beneficiary",
+                textAlign: TextAlign.center,
+                style: CustomTextStyles.bold_20_black_appbarText(context),
               ),
-            );
-          },
+              20.flexPaddingHeight,
+              AddBeneficirayForm(itemsCount: _beneficiariesCount)
+            ],
+          ),
         );
       },
-      child: Icon(
+    );
+  }
+
+  Widget _buildFloatingButton() {
+    return FloatingActionButton(
+      shape: const CircleBorder(),
+      backgroundColor: StaticColors.themeColor,
+      onPressed: () {
+        _showAddBeneficirayBottomSheet();
+      },
+      child: const Icon(
         Icons.add,
         color: Colors.white,
       ),

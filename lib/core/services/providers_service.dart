@@ -12,6 +12,9 @@ class ProvidersService {
           getIt(),
         ),
       ),
+      BlocProvider<HomeBloc>(
+        create: (_) => HomeBloc(),
+      ),
     ];
   }
 }

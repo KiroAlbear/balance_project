@@ -1,11 +1,23 @@
 import 'package:balance_project/imports.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomePage extends BaseStatelessPage {
+class HomePage extends BaseStatefulPage {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends BaseState<HomePage> {
+  @override
   bool containPadding() => false;
+
+  @override
+  void initState() {
+    BlocProvider.of<HomeBloc>(context).add(getHomeBalanceEvent());
+    super.initState();
+  }
 
   @override
   Widget body(BuildContext context) {
@@ -47,7 +59,6 @@ class HomePage extends BaseStatelessPage {
           ],
         ),
       ),
-
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

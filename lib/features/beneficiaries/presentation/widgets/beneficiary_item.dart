@@ -11,7 +11,7 @@ class BeneficiaryItem extends StatelessWidget {
     return Card(
       elevation: 10,
       color: Colors.white,
-      margin: EdgeInsets.all(0),
+      margin: const EdgeInsets.all(0),
       child: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: AppDimensions.w(8), vertical: AppDimensions.h(12)),
@@ -30,12 +30,12 @@ class BeneficiaryItem extends StatelessWidget {
                   child: Center(
                       child: Text(
                     name[0],
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 20,
                     ),
                   )),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -53,11 +53,9 @@ class BeneficiaryItem extends StatelessWidget {
                 showDialog(
                   context: context,
                   builder: (context) {
-                    return DeleteBeneficirayAlertDialog(phoneNumber: phone);
+                    return DeleteBeneficiaryAlertDialog(phoneNumber: phone);
                   },
                 );
-                // BlocProvider.of<BeneficiariesBloc>(context)
-                //     .add(deleteBeneficiaryEvent(phoneNumber: phone));
               },
               icon: Icon(
                 Icons.delete,

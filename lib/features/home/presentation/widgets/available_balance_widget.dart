@@ -1,10 +1,36 @@
-import 'package:balance_project/config/colors/static_colors.dart';
-import 'package:balance_project/config/dimensions/app_dimensions.dart';
-import 'package:balance_project/config/font/custom_text_styles.dart';
+import 'package:balance_project/imports.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AvailableBalanceWidget extends StatelessWidget {
   const AvailableBalanceWidget({super.key});
+
+  void _showEditBalanceBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      useSafeArea: true,
+      backgroundColor: Colors.white,
+      context: context,
+      builder: (context) {
+        return SizedBox(
+          height: 500,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              20.flexPaddingHeight,
+              Text(
+                "Edit Balance",
+                textAlign: TextAlign.center,
+                style: CustomTextStyles.bold_20_black_appbarText(context),
+              ),
+              20.flexPaddingHeight,
+              HomeEditBalanceWidget()
+            ],
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +63,18 @@ class AvailableBalanceWidget extends StatelessWidget {
                     SizedBox(
                       width: 5,
                     ),
-                    Text(
-                      "1000",
-                      style: CustomTextStyles.bold_20_white(context)
-                          .copyWith(height: 1.5),
+                    BlocBuilder<HomeBloc, HomeState>(
+                      builder: (context, state) {
+                        if (state.status == Status.success) {
+                          return Text(
+                            state.homeBalance!,
+                            style: CustomTextStyles.bold_20_white(context)
+                                .copyWith(height: 1.5),
+                          );
+                        } else {
+                          return SizedBox();
+                        }
+                      },
                     ),
                   ],
                 ),
@@ -50,7 +84,9 @@ class AvailableBalanceWidget extends StatelessWidget {
               color: Colors.transparent,
               child: InkWell(
                 borderRadius: BorderRadius.circular(100),
-                onTap: () {},
+                onTap: () {
+                  _showEditBalanceBottomSheet(context);
+                },
                 child: Container(
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,

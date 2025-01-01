@@ -6,10 +6,17 @@ abstract class HomeEvent extends Equatable {
   List<Object> get props => <Object>[];
 }
 
-class getHomeEvent extends HomeEvent {
-  final int number;
-  const getHomeEvent(this.number);
+class getHomeBalanceEvent extends HomeEvent {
+  const getHomeBalanceEvent();
 
   @override
-  List<Object> get props => <Object>[number];
+  List<Object> get props => <Object>[];
+}
+
+class addHomeBalanceEvent extends HomeEvent {
+  final String balance;
+  const addHomeBalanceEvent(this.balance);
+
+  @override
+  List<Object> get props => <Object>[balance];
 }

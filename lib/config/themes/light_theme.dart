@@ -7,8 +7,10 @@ ThemeData lightTheme(BuildContext context) => ThemeData(
           ),
       scaffoldBackgroundColor: StaticColors.scaffoldBackground_7F4,
       textTheme: TextTheme(
-        //kiro
-        titleMedium: TextStyleBlueprint.titleMediumTextStyle(context),
+        titleMedium: TextStyleBlueprint.style(context,
+            color: StaticColors.blackTextColor_858,
+            fontSize: 18.0,
+            fontWeight: FontWeight.w500),
       ),
       drawerTheme: const DrawerThemeData(
           backgroundColor: StaticColors.drawerLightBgColor_5e5),

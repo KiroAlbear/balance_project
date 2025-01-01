@@ -7,6 +7,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 // prevent copy and paste
 enum CustomTextFieldType { number, email, text }
 
+enum IconType { svg, image }
+
 class CustomTextField extends StatefulWidget {
   final String hint;
   final String lable;
@@ -18,11 +20,13 @@ class CustomTextField extends StatefulWidget {
   final bool isButton;
   final void Function()? onTap;
   final CustomTextFieldType type;
+  final IconType iconType;
   CustomTextField(
       {required this.hint,
       required this.lable,
       required this.icon,
       required this.controller,
+      this.iconType = IconType.svg,
       this.maxLength,
       this.isRequired = false,
       this.isButton = false,
@@ -69,12 +73,17 @@ class _CustomTextFieldState extends State<CustomTextField> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
-              SvgPicture.asset(
-                widget.icon,
-                colorFilter: ColorFilter.mode(
-                    _isValid ? StaticColors.themeColor : Colors.red,
-                    BlendMode.srcIn),
-              ),
+              widget.iconType == IconType.svg
+                  ? SvgPicture.asset(
+                      widget.icon,
+                      colorFilter: ColorFilter.mode(
+                          _isValid ? StaticColors.themeColor : Colors.red,
+                          BlendMode.srcIn),
+                    )
+                  : Image.asset(
+                      widget.icon,
+                      width: 35,
+                    ),
               SizedBox(
                 width: 10,
               ),

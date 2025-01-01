@@ -5,13 +5,6 @@ part 'home_state.g.dart';
 
 @CopyWith()
 class HomeState extends ParentState {
-  int? number = 0;
-  HomeState({this.number});
-}
-
-@CopyWith()
-class HomeAnotherState extends ParentState {
-  int? number = 0;
-
-  HomeAnotherState({this.number});
+  String? homeBalance;
+  HomeState({this.homeBalance});
 }

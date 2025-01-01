@@ -33,16 +33,4 @@ class TextStyleBlueprint {
 
     return selectedTextStyle;
   }
-
-  static TextStyle? titleMediumTextStyle(BuildContext context) {
-    return style(
-      context,
-      fontSize: AppDimensions.h(18),
-      fontWeight: FontWeight.w600,
-      color: GenericColors.getColors(
-        context,
-        GenericColors.black_03E_white_textColor,
-      ),
-    );
-  }
 }

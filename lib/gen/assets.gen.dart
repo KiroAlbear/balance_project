@@ -25,6 +25,9 @@ class $AssetsImagesGen {
 class $AssetsImagesPngGen {
   const $AssetsImagesPngGen();
 
+  /// File path: assets/images/png/alert.png
+  AssetGenImage get alert => const AssetGenImage('assets/images/png/alert.png');
+
   /// File path: assets/images/png/check.png
   AssetGenImage get check => const AssetGenImage('assets/images/png/check.png');
 
@@ -43,9 +46,13 @@ class $AssetsImagesPngGen {
   AssetGenImage get verified =>
       const AssetGenImage('assets/images/png/verified.png');
 
+  /// File path: assets/images/png/wallet.png
+  AssetGenImage get wallet =>
+      const AssetGenImage('assets/images/png/wallet.png');
+
   /// List of all assets
   List<AssetGenImage> get values =>
-      [check, cross, emptyList, icLauncher, verified];
+      [alert, check, cross, emptyList, icLauncher, verified, wallet];
 }
 
 class $AssetsImagesSvgGen {

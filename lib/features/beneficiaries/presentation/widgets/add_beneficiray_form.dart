@@ -37,7 +37,7 @@ class AddBeneficirayForm extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: AppDimensions.w(12)),
               child: CustomElevatedButton(
-                child: Text(
+                child: const Text(
                   "Add",
                 ),
                 onPressed: () {
