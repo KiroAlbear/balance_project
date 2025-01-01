@@ -6,7 +6,8 @@ class AddBeneficirayForm extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
-  AddBeneficirayForm({super.key});
+  final int itemsCount;
+  AddBeneficirayForm({required this.itemsCount, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +41,11 @@ class AddBeneficirayForm extends StatelessWidget {
                   "Add",
                 ),
                 onPressed: () {
+                  if (itemsCount >= 5) {
+                    AppToast.showToast(
+                        "You can't add more than 5 beneficiaries");
+                    return;
+                  }
                   _formKey.currentState!.validate();
                   if (_nameController.text.isNotEmpty &&
                       _phoneController.text.isNotEmpty) {

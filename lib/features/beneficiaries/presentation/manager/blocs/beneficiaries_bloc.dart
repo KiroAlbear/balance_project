@@ -38,7 +38,8 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
         if (beneficiaries.isEmpty)
           emit(state.copyWith()..status = Status.empty);
         else {
-          emit(state.copyWith(beneficiaries: beneficiaries)
+          emit(state.copyWith(
+              beneficiaries: beneficiaries, isListChanged: !state.isListChanged)
             ..status = Status.success);
         }
       },

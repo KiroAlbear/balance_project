@@ -6,6 +6,7 @@ part 'beneficiaries_state.g.dart';
 @CopyWith()
 class BeneficiariesState extends ParentState {
   List<BeneficiariesModel>? beneficiaries;
+  bool isListChanged = false;
 
-  BeneficiariesState({this.beneficiaries});
+  BeneficiariesState({this.beneficiaries, this.isListChanged = false});
 }

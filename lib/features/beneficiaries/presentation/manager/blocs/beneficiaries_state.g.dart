@@ -9,6 +9,8 @@ part of 'beneficiaries_state.dart';
 abstract class _$BeneficiariesStateCWProxy {
   BeneficiariesState beneficiaries(List<BeneficiariesModel>? beneficiaries);
 
+  BeneficiariesState isListChanged(bool isListChanged);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `BeneficiariesState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -17,6 +19,7 @@ abstract class _$BeneficiariesStateCWProxy {
   /// ````
   BeneficiariesState call({
     List<BeneficiariesModel>? beneficiaries,
+    bool? isListChanged,
   });
 }
 
@@ -31,6 +34,10 @@ class _$BeneficiariesStateCWProxyImpl implements _$BeneficiariesStateCWProxy {
       this(beneficiaries: beneficiaries);
 
   @override
+  BeneficiariesState isListChanged(bool isListChanged) =>
+      this(isListChanged: isListChanged);
+
+  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `BeneficiariesState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -40,12 +47,18 @@ class _$BeneficiariesStateCWProxyImpl implements _$BeneficiariesStateCWProxy {
   /// ````
   BeneficiariesState call({
     Object? beneficiaries = const $CopyWithPlaceholder(),
+    Object? isListChanged = const $CopyWithPlaceholder(),
   }) {
     return BeneficiariesState(
       beneficiaries: beneficiaries == const $CopyWithPlaceholder()
           ? _value.beneficiaries
           // ignore: cast_nullable_to_non_nullable
           : beneficiaries as List<BeneficiariesModel>?,
+      isListChanged:
+          isListChanged == const $CopyWithPlaceholder() || isListChanged == null
+              ? _value.isListChanged
+              // ignore: cast_nullable_to_non_nullable
+              : isListChanged as bool,
     );
   }
 }

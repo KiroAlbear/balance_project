@@ -10,13 +10,14 @@ class BeneficiariesPage extends BaseStatefulPage {
 }
 
 class _BeneficiariesPageState extends BaseState<BeneficiariesPage> {
+  int _beneficiariesCount = 0;
+
   @override
   bool containPadding() => false;
 
   @override
   void initState() {
     BlocProvider.of<BeneficiariesBloc>(context).add(getBeneficiariesEvent());
-
     super.initState();
   }
 
@@ -47,7 +48,7 @@ class _BeneficiariesPageState extends BaseState<BeneficiariesPage> {
                       style: CustomTextStyles.bold_20_black_appbarText(context),
                     ),
                     20.flexPaddingHeight,
-                    AddBeneficirayForm(),
+                    AddBeneficirayForm(itemsCount: _beneficiariesCount)
                   ],
                 ),
               );
@@ -71,7 +72,11 @@ class _BeneficiariesPageState extends BaseState<BeneficiariesPage> {
               ),
               20.flexPaddingHeight,
               ParentBloc<BeneficiariesBloc, BeneficiariesState>(
-                  builder: (BeneficiariesState state) {
+                  listenerFunction: (context, state) {
+                if (state.beneficiaries != null) {
+                  _beneficiariesCount = state.beneficiaries!.length;
+                }
+              }, builder: (BeneficiariesState state) {
                 return ListView.separated(
                   shrinkWrap: true,
                   separatorBuilder: (context, index) {
