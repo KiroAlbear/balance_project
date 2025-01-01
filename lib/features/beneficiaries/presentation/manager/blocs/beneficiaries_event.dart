@@ -23,6 +23,14 @@ class addBeneficiaryEvent extends BeneficiariesEvent {
   List<Object> get props => <Object>[name, phoneNumber];
 }
 
+class selectBeneficiaryEvent extends BeneficiariesEvent {
+  final int selectedIndex;
+  const selectBeneficiaryEvent({required this.selectedIndex});
+
+  @override
+  List<Object> get props => <Object>[selectedIndex];
+}
+
 class deleteBeneficiaryEvent extends BeneficiariesEvent {
   final String phoneNumber;
   const deleteBeneficiaryEvent({required this.phoneNumber});

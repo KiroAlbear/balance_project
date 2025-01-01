@@ -11,6 +11,8 @@ abstract class _$BeneficiariesStateCWProxy {
 
   BeneficiariesState showOverlayLoading(bool showOverlayLoading);
 
+  BeneficiariesState selectedBeneficiaryIndex(int selectedBeneficiaryIndex);
+
   BeneficiariesState isListChanged(bool isListChanged);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `BeneficiariesState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
@@ -22,6 +24,7 @@ abstract class _$BeneficiariesStateCWProxy {
   BeneficiariesState call({
     List<BeneficiariesModel>? beneficiaries,
     bool? showOverlayLoading,
+    int? selectedBeneficiaryIndex,
     bool? isListChanged,
   });
 }
@@ -41,6 +44,10 @@ class _$BeneficiariesStateCWProxyImpl implements _$BeneficiariesStateCWProxy {
       this(showOverlayLoading: showOverlayLoading);
 
   @override
+  BeneficiariesState selectedBeneficiaryIndex(int selectedBeneficiaryIndex) =>
+      this(selectedBeneficiaryIndex: selectedBeneficiaryIndex);
+
+  @override
   BeneficiariesState isListChanged(bool isListChanged) =>
       this(isListChanged: isListChanged);
 
@@ -55,6 +62,7 @@ class _$BeneficiariesStateCWProxyImpl implements _$BeneficiariesStateCWProxy {
   BeneficiariesState call({
     Object? beneficiaries = const $CopyWithPlaceholder(),
     Object? showOverlayLoading = const $CopyWithPlaceholder(),
+    Object? selectedBeneficiaryIndex = const $CopyWithPlaceholder(),
     Object? isListChanged = const $CopyWithPlaceholder(),
   }) {
     return BeneficiariesState(
@@ -67,6 +75,12 @@ class _$BeneficiariesStateCWProxyImpl implements _$BeneficiariesStateCWProxy {
           ? _value.showOverlayLoading
           // ignore: cast_nullable_to_non_nullable
           : showOverlayLoading as bool,
+      selectedBeneficiaryIndex:
+          selectedBeneficiaryIndex == const $CopyWithPlaceholder() ||
+                  selectedBeneficiaryIndex == null
+              ? _value.selectedBeneficiaryIndex
+              // ignore: cast_nullable_to_non_nullable
+              : selectedBeneficiaryIndex as int,
       isListChanged:
           isListChanged == const $CopyWithPlaceholder() || isListChanged == null
               ? _value.isListChanged

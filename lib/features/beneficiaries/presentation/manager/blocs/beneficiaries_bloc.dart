@@ -14,6 +14,7 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
     on<getBeneficiariesEvent>(_getBeneficiaries);
     on<addBeneficiaryEvent>(_addBeneficiary);
     on<deleteBeneficiaryEvent>(_deleteBeneficiary);
+    on<selectBeneficiaryEvent>(_seleteBeneficiary);
   }
 
   FutureOr<void> _getBeneficiaries(
@@ -89,5 +90,12 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
         add(getBeneficiariesEvent(showOverlayLoading: true));
       },
     );
+  }
+
+  FutureOr<void> _seleteBeneficiary(
+      selectBeneficiaryEvent event, Emitter<BeneficiariesState> emit) {
+    emit(state.copyWith(
+        selectedBeneficiaryIndex: event.selectedIndex,
+        isListChanged: !state.isListChanged));
   }
 }
