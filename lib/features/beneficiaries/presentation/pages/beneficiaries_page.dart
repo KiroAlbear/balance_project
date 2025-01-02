@@ -12,7 +12,7 @@ class BeneficiariesPage extends BaseStatefulPage {
 
 class _BeneficiariesPageState extends BaseState<BeneficiariesPage> {
   int _beneficiariesCount = 0;
-
+  ValueNotifier<bool> _isFloatingButtonVisible = ValueNotifier<bool>(false);
   @override
   bool containPadding() => false;
 
@@ -39,16 +39,23 @@ class _BeneficiariesPageState extends BaseState<BeneficiariesPage> {
   }
 
   Widget _buildFloatingButton() {
-    return FloatingActionButton(
-      shape: const CircleBorder(),
-      backgroundColor: StaticColors.themeColor,
-      onPressed: () {
-        _showAddBeneficirayBottomSheet();
+    return ValueListenableBuilder<bool>(
+      valueListenable: _isFloatingButtonVisible,
+      builder: (context, bool value, child) {
+        return value
+            ? FloatingActionButton(
+                shape: const CircleBorder(),
+                backgroundColor: StaticColors.themeColor,
+                onPressed: () {
+                  _showAddBeneficirayBottomSheet();
+                },
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+              )
+            : SizedBox();
       },
-      child: const Icon(
-        Icons.add,
-        color: Colors.white,
-      ),
     );
   }
 
@@ -75,10 +82,16 @@ class _BeneficiariesPageState extends BaseState<BeneficiariesPage> {
                   20.flexPaddingHeight,
                   ParentBloc<BeneficiariesBloc, BeneficiariesState>(
                       listenWhen: (previous, current) =>
-                          previous.isListChanged != current.isListChanged,
+                          (previous.isListChanged != current.isListChanged ||
+                              previous.status != current.status),
                       listenerFunction: (context, state) {
                         if (state.beneficiaries != null) {
                           _beneficiariesCount = state.beneficiaries!.length;
+                        }
+                        if (state.status == Status.error) {
+                          _isFloatingButtonVisible.value = false;
+                        } else {
+                          _isFloatingButtonVisible.value = true;
                         }
                       },
                       builder: (BeneficiariesState state) {
