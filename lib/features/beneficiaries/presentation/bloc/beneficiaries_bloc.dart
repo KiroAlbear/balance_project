@@ -133,22 +133,6 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
     }
   }
 
-  Future<void> testData(payBeneficiaryEvent event) async {
-    String data = await SecureStorageService.getInstance()
-        .getValue(SecureStorageKeys.beneficiariesAmounts);
-
-    await SecureStorageService()
-        .setValue(SecureStorageKeys.beneficiariesAmounts, "");
-
-    await SecureStorageService()
-        .setValue(SecureStorageKeys.isUserVerified, "true");
-
-    Map<String, dynamic> map = data.isEmpty ? {} : jsonDecode(data);
-    map[event.phoneNumber] = "100#${DateTime.now().toString()}";
-    await SecureStorageService.getInstance()
-        .setValue(SecureStorageKeys.beneficiariesAmounts, jsonEncode(map));
-  }
-
   bool _isMaximumTopUpReached(Map<String, dynamic> map, int amount) {
     int total = 0;
     map.forEach((key, value) {

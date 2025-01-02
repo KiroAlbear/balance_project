@@ -8,4 +8,7 @@ class HomeState extends ParentState {
   String? homeBalance;
   bool isUserVerified;
   HomeState({this.homeBalance, this.isUserVerified = false});
+
+  @override
+  List<Object?> get props => [homeBalance, isUserVerified];
 }
