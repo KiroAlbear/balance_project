@@ -116,10 +116,14 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
 
   FutureOr<void> _seleteAmount(
       selectAmountEvent event, Emitter<BeneficiariesState> emit) {
-    emit(state.copyWith(
-      selectedAmountIndex: event.selectedIndex,
-      totalAmountWithoutFees: amounts[event.selectedIndex].amount,
-      totalAmount: amounts[event.selectedIndex].amount + 3,
-    ));
+    if (event.selectedIndex == -1) {
+      emit(state.copyWith(selectedAmountIndex: event.selectedIndex));
+    } else {
+      emit(state.copyWith(
+        selectedAmountIndex: event.selectedIndex,
+        totalAmountWithoutFees: amounts[event.selectedIndex].amount,
+        totalAmount: amounts[event.selectedIndex].amount + 3,
+      ));
+    }
   }
 }
