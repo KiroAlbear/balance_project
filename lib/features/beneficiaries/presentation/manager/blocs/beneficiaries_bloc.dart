@@ -163,7 +163,7 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
     // await SecureStorageService()
     //     .setValue(SecureStorageKeys.beneficiariesAmounts, "");
 
-    await testData(event);
+    // await testData(event);
 
     String balance = await SecureStorageService.getInstance()
         .getValue(SecureStorageKeys.userBalance);
@@ -184,48 +184,45 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
         .getValue(SecureStorageKeys.beneficiariesAmounts);
 
     Map<String, dynamic> map = data.isEmpty ? {} : jsonDecode(data);
+    bool isNull = map[event.phoneNumber] == null;
 
-    if (map[event.phoneNumber] != null) {
-      List<String> split = map[event.phoneNumber].split("#");
-      DateTime date = DateTime.parse(split[1]);
-      int currentAmount = int.parse(split[0]);
-      bool isSameMonth = date.month == DateTime.now().month;
-      int totalAfterSum = currentAmount + int.parse(event.amount);
+    List<String> split = isNull ? [] : map[event.phoneNumber].split("#");
+    DateTime date = isNull ? DateTime.now() : DateTime.parse(split[1]);
+    int currentAmount = isNull ? 0 : int.parse(split[0]);
+    bool isSameMonth = date.month == DateTime.now().month;
+    int totalAfterSum = currentAmount + int.parse(event.amount);
 
-      if (isSameMonth &&
-          (isVerified.isEmpty || isVerified == "false") &&
-          totalAfterSum > 500) {
-        emit(state.copyWith(isPaymentSuccess: false));
-        AppToast.showToast(
-            "You can't pay more than 500 AED per calendar month per beneficiary");
-        return;
-      } else if (_isMaximumTopUpReached(map, int.parse(event.amount))) {
-        emit(state.copyWith(isPaymentSuccess: false));
-        AppToast.showToast(
-            "You can't pay more than 3000 AED per calendar month for all beneficiaries");
-      } else if (isSameMonth &&
-          (isVerified == "true") &&
-          totalAfterSum > 1000) {
-        emit(state.copyWith(isPaymentSuccess: false));
-        AppToast.showToast(
-            "You can't pay more than 1000 AED per calendar month per beneficiary");
-        return;
-      } else {
-        map[event.phoneNumber] = data.isEmpty
-            ? "${event.amount}#${DateTime.now().toString()}"
-            : "${(currentAmount + int.parse(event.amount)).toString()}:${DateTime.now().toString()}";
+    if (isSameMonth &&
+        (isVerified.isEmpty || isVerified == "false") &&
+        totalAfterSum > 500) {
+      emit(state.copyWith(isPaymentSuccess: false));
+      AppToast.showToast(
+          "You can't pay more than 500 AED per calendar month per beneficiary");
+      return;
+    } else if (_isMaximumTopUpReached(map, int.parse(event.amount))) {
+      emit(state.copyWith(isPaymentSuccess: false));
+      AppToast.showToast(
+          "You can't pay more than 3000 AED per calendar month for all beneficiaries");
+    } else if (isSameMonth && (isVerified == "true") && totalAfterSum > 1000) {
+      emit(state.copyWith(isPaymentSuccess: false));
+      AppToast.showToast(
+          "You can't pay more than 1000 AED per calendar month per beneficiary");
+      return;
+    } else {
+      map[event.phoneNumber] = data.isEmpty
+          ? "${event.amount}#${DateTime.now().toString()}"
+          : "${(currentAmount + int.parse(event.amount)).toString()}:${DateTime.now().toString()}";
 
-        await SecureStorageService.getInstance()
-            .setValue(SecureStorageKeys.beneficiariesAmounts, jsonEncode(map));
+      await SecureStorageService.getInstance()
+          .setValue(SecureStorageKeys.beneficiariesAmounts, jsonEncode(map));
 
-        await SecureStorageService.getInstance()
-            .setValue(SecureStorageKeys.userBalance, newBalance.toString());
+      await SecureStorageService.getInstance()
+          .setValue(SecureStorageKeys.userBalance, newBalance.toString());
 
-        emit(state.copyWith(
-            isPaymentSuccess: true,
-            selectedAmountIndex: -1,
-            selectedBeneficiaryIndex: -1));
-      }
+      emit(state.copyWith(
+          isPaymentSuccess: true,
+          selectedAmountIndex: -1,
+          selectedBeneficiaryIndex: -1));
     }
   }
 }

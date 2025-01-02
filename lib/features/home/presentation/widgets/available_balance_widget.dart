@@ -65,15 +65,11 @@ class AvailableBalanceWidget extends StatelessWidget {
                     ),
                     BlocBuilder<HomeBloc, HomeState>(
                       builder: (context, state) {
-                        if (state.status == Status.success) {
-                          return Text(
-                            state.homeBalance!,
-                            style: CustomTextStyles.bold_20_white(context)
-                                .copyWith(height: 1.5),
-                          );
-                        } else {
-                          return SizedBox();
-                        }
+                        return Text(
+                          state.homeBalance != null ? state.homeBalance! : "0",
+                          style: CustomTextStyles.bold_20_white(context)
+                              .copyWith(height: 1.5),
+                        );
                       },
                     ),
                   ],
