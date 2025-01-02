@@ -13,12 +13,14 @@ class BeneficiariesState extends ParentState {
   int totalAmountWithoutFees = 0;
   bool isListChanged = false;
   bool showOverlayLoading;
+  bool isPaymentSuccess;
   BeneficiariesState(
       {this.beneficiaries,
       this.amounts,
       this.totalAmount = 0,
       this.totalAmountWithoutFees = 0,
       this.showOverlayLoading = false,
+      this.isPaymentSuccess = false,
       this.selectedBeneficiaryIndex = -1,
       this.selectedAmountIndex = -1,
       this.isListChanged = false});

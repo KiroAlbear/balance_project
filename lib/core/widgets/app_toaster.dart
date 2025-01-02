@@ -56,7 +56,7 @@ class AppToast {
                   const SizedBox(width: 10.0),
                   Expanded(
                     child: Text(
-                      maxLines: 2,
+                      maxLines: 5,
                       overflow: TextOverflow.ellipsis,
                       message,
                       style: TextStyle(

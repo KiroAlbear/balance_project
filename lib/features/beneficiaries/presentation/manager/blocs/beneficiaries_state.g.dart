@@ -17,6 +17,8 @@ abstract class _$BeneficiariesStateCWProxy {
 
   BeneficiariesState showOverlayLoading(bool showOverlayLoading);
 
+  BeneficiariesState isPaymentSuccess(bool isPaymentSuccess);
+
   BeneficiariesState selectedBeneficiaryIndex(int selectedBeneficiaryIndex);
 
   BeneficiariesState selectedAmountIndex(int selectedAmountIndex);
@@ -35,6 +37,7 @@ abstract class _$BeneficiariesStateCWProxy {
     int? totalAmount,
     int? totalAmountWithoutFees,
     bool? showOverlayLoading,
+    bool? isPaymentSuccess,
     int? selectedBeneficiaryIndex,
     int? selectedAmountIndex,
     bool? isListChanged,
@@ -68,6 +71,10 @@ class _$BeneficiariesStateCWProxyImpl implements _$BeneficiariesStateCWProxy {
       this(showOverlayLoading: showOverlayLoading);
 
   @override
+  BeneficiariesState isPaymentSuccess(bool isPaymentSuccess) =>
+      this(isPaymentSuccess: isPaymentSuccess);
+
+  @override
   BeneficiariesState selectedBeneficiaryIndex(int selectedBeneficiaryIndex) =>
       this(selectedBeneficiaryIndex: selectedBeneficiaryIndex);
 
@@ -93,6 +100,7 @@ class _$BeneficiariesStateCWProxyImpl implements _$BeneficiariesStateCWProxy {
     Object? totalAmount = const $CopyWithPlaceholder(),
     Object? totalAmountWithoutFees = const $CopyWithPlaceholder(),
     Object? showOverlayLoading = const $CopyWithPlaceholder(),
+    Object? isPaymentSuccess = const $CopyWithPlaceholder(),
     Object? selectedBeneficiaryIndex = const $CopyWithPlaceholder(),
     Object? selectedAmountIndex = const $CopyWithPlaceholder(),
     Object? isListChanged = const $CopyWithPlaceholder(),
@@ -122,6 +130,11 @@ class _$BeneficiariesStateCWProxyImpl implements _$BeneficiariesStateCWProxy {
           ? _value.showOverlayLoading
           // ignore: cast_nullable_to_non_nullable
           : showOverlayLoading as bool,
+      isPaymentSuccess: isPaymentSuccess == const $CopyWithPlaceholder() ||
+              isPaymentSuccess == null
+          ? _value.isPaymentSuccess
+          // ignore: cast_nullable_to_non_nullable
+          : isPaymentSuccess as bool,
       selectedBeneficiaryIndex:
           selectedBeneficiaryIndex == const $CopyWithPlaceholder() ||
                   selectedBeneficiaryIndex == null

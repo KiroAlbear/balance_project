@@ -14,6 +14,11 @@ class _ProfilePageState extends BaseState<ProfilePage> {
 
   bool isSwitched = false;
 
+  void saveUserData(bool isSwitched) async {
+    await SecureStorageService.getInstance()
+        .setValue(SecureStorageKeys.isUserVerified, isSwitched.toString());
+  }
+
   @override
   Widget body(BuildContext context) {
     return Scaffold(
@@ -42,7 +47,8 @@ class _ProfilePageState extends BaseState<ProfilePage> {
                     value: isSwitched,
                     activeColor: StaticColors.themeColor,
                     inactiveTrackColor: Colors.grey[100],
-                    onChanged: (value) {
+                    onChanged: (bool value) {
+                      saveUserData(value);
                       setState(() {
                         isSwitched = value;
                       });

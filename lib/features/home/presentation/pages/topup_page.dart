@@ -155,7 +155,6 @@ class _TopupPageState extends BaseState<TopupPage> {
               'Amount Details',
               style: CustomTextStyles.regular_14_black(context),
             ),
-
             BlocBuilder<BeneficiariesBloc, BeneficiariesState>(
               builder: (context, BeneficiariesState state) {
                 if (state.selectedAmountIndex == -1) {
@@ -176,15 +175,22 @@ class _TopupPageState extends BaseState<TopupPage> {
                 }
               },
             ),
-
-            // AmountItem(value: "EGP 100", index: 2),
-            // ChooseBeneficiaryCard(
-            //   text: 'Select Amount',
-            //   onTap: () {},
-            // ),
             20.flexPaddingHeight,
+            BlocConsumer<BeneficiariesBloc, BeneficiariesState>(
+              listenWhen: (previous, current) =>
+                  previous.isPaymentSuccess != current.isPaymentSuccess,
+              listener: (context, state) {
+                if (state.isPaymentSuccess) {
+                  BlocProvider.of<HomeBloc>(context).add(getHomeBalanceEvent());
+                  BlocProvider.of<BeneficiariesBloc>(context)
+                      .add(selectAmountEvent(selectedIndex: -1));
+                  BlocProvider.of<BeneficiariesBloc>(context)
+                      .add(selectBeneficiaryEvent(selectedIndex: -1));
 
-            BlocBuilder<BeneficiariesBloc, BeneficiariesState>(
+                  Routes.navigateToScreen(Routes.successScreen,
+                      NavigateType.pushReplacementNamed, context);
+                }
+              },
               builder: (context, BeneficiariesState state) {
                 return Column(
                   children: [
@@ -223,8 +229,16 @@ class _TopupPageState extends BaseState<TopupPage> {
                             AppToast.showToast(
                                 "Please select amount and beneficiary");
                           } else {
-                            Routes.navigateToScreen(Routes.successScreen,
-                                NavigateType.pushNamed, context);
+                            BlocProvider.of<BeneficiariesBloc>(context).add(
+                                payBeneficiaryEvent(
+                                    phoneNumber: state
+                                        .beneficiaries![
+                                            state.selectedBeneficiaryIndex]
+                                        .phoneNumber!,
+                                    amount: state
+                                        .amounts![state.selectedAmountIndex]
+                                        .amount
+                                        .toString()));
                           }
                         })
                   ],
