@@ -30,6 +30,7 @@ class AmountItem extends StatelessWidget {
               horizontal: AppDimensions.w(8), vertical: AppDimensions.h(12)),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
                 height: AppDimensions.h(70),
@@ -43,6 +44,20 @@ class AmountItem extends StatelessWidget {
                   ),
                 ),
               ),
+              index > 6
+                  ? Container(
+                      height: AppDimensions.h(70),
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "for testing only",
+                            style: CustomTextStyles.regular_16_grey(context),
+                          ),
+                        ),
+                      ),
+                    )
+                  : SizedBox(),
             ],
           ),
         ),
