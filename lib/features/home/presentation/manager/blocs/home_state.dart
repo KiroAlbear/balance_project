@@ -6,5 +6,6 @@ part 'home_state.g.dart';
 @CopyWith()
 class HomeState extends ParentState {
   String? homeBalance;
-  HomeState({this.homeBalance});
+  bool isUserVerified;
+  HomeState({this.homeBalance, this.isUserVerified = false});
 }

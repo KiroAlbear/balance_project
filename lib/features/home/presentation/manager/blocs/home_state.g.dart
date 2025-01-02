@@ -9,6 +9,8 @@ part of 'home_state.dart';
 abstract class _$HomeStateCWProxy {
   HomeState homeBalance(String? homeBalance);
 
+  HomeState isUserVerified(bool isUserVerified);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `HomeState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -17,6 +19,7 @@ abstract class _$HomeStateCWProxy {
   /// ````
   HomeState call({
     String? homeBalance,
+    bool? isUserVerified,
   });
 }
 
@@ -30,6 +33,10 @@ class _$HomeStateCWProxyImpl implements _$HomeStateCWProxy {
   HomeState homeBalance(String? homeBalance) => this(homeBalance: homeBalance);
 
   @override
+  HomeState isUserVerified(bool isUserVerified) =>
+      this(isUserVerified: isUserVerified);
+
+  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `HomeState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -39,12 +46,18 @@ class _$HomeStateCWProxyImpl implements _$HomeStateCWProxy {
   /// ````
   HomeState call({
     Object? homeBalance = const $CopyWithPlaceholder(),
+    Object? isUserVerified = const $CopyWithPlaceholder(),
   }) {
     return HomeState(
       homeBalance: homeBalance == const $CopyWithPlaceholder()
           ? _value.homeBalance
           // ignore: cast_nullable_to_non_nullable
           : homeBalance as String?,
+      isUserVerified: isUserVerified == const $CopyWithPlaceholder() ||
+              isUserVerified == null
+          ? _value.isUserVerified
+          // ignore: cast_nullable_to_non_nullable
+          : isUserVerified as bool,
     );
   }
 }

@@ -16,6 +16,7 @@ class _HomePageState extends BaseState<HomePage> {
   @override
   void initState() {
     BlocProvider.of<HomeBloc>(context).add(getHomeBalanceEvent());
+    BlocProvider.of<HomeBloc>(context).add(getUserVerificationEvent());
     BlocProvider.of<BeneficiariesBloc>(context).add(getBeneficiariesEvent());
     BlocProvider.of<BeneficiariesBloc>(context).add(getAmountEvent());
     super.initState();
@@ -40,10 +41,18 @@ class _HomePageState extends BaseState<HomePage> {
                   style: CustomTextStyles.bold_20_black_appbarText(context),
                 ),
                 5.flexPaddingWidth,
-                Image.asset(
-                  Assets.images.png.verified.path,
-                  width: 17,
-                  height: 17,
+                BlocBuilder<HomeBloc, HomeState>(
+                  builder: (context, state) {
+                    if (state.isUserVerified) {
+                      return Image.asset(
+                        Assets.images.png.verified.path,
+                        width: 17,
+                        height: 17,
+                      );
+                    } else {
+                      return SizedBox();
+                    }
+                  },
                 )
               ],
             ),

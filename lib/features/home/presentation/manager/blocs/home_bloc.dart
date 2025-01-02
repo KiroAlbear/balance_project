@@ -7,6 +7,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeState()) {
     on<getHomeBalanceEvent>(_getHomeBalance);
     on<addHomeBalanceEvent>(_addHomeBalance);
+    on<getUserVerificationEvent>(_getUserVerification);
+    on<addUserVerificationEvent>(_addUserVerification);
   }
 
   FutureOr<void> _getHomeBalance(
@@ -32,5 +34,21 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         .setValue(SecureStorageKeys.userBalance, event.balance);
 
     add(getHomeBalanceEvent());
+  }
+
+  FutureOr<void> _getUserVerification(
+      getUserVerificationEvent event, Emitter<HomeState> emit) async {
+    String isVerified = await SecureStorageService.getInstance()
+        .getValue(SecureStorageKeys.isUserVerified);
+
+    emit(state.copyWith(isUserVerified: isVerified == "true"));
+  }
+
+  FutureOr<void> _addUserVerification(
+      addUserVerificationEvent event, Emitter<HomeState> emit) async {
+    await SecureStorageService.getInstance()
+        .setValue(SecureStorageKeys.isUserVerified, event.isVerified);
+
+    emit(state.copyWith(isUserVerified: event.isVerified == "true"));
   }
 }

@@ -1,5 +1,6 @@
 import 'package:balance_project/imports.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfilePage extends BaseStatefulPage {
   ProfilePage({super.key});
@@ -15,8 +16,8 @@ class _ProfilePageState extends BaseState<ProfilePage> {
   bool isSwitched = false;
 
   void saveUserData(bool isSwitched) async {
-    await SecureStorageService.getInstance()
-        .setValue(SecureStorageKeys.isUserVerified, isSwitched.toString());
+    BlocProvider.of<HomeBloc>(context)
+        .add(addUserVerificationEvent(isSwitched.toString()));
   }
 
   @override
@@ -40,18 +41,22 @@ class _ProfilePageState extends BaseState<ProfilePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "User verified",
+                    "User Verified",
                     style: CustomTextStyles.regular_16_black(context),
                   ),
-                  Switch(
-                    value: isSwitched,
-                    activeColor: StaticColors.themeColor,
-                    inactiveTrackColor: Colors.grey[100],
-                    onChanged: (bool value) {
-                      saveUserData(value);
-                      setState(() {
-                        isSwitched = value;
-                      });
+                  BlocBuilder<HomeBloc, HomeState>(
+                    builder: (context, state) {
+                      return Switch(
+                        value: state.isUserVerified,
+                        activeColor: StaticColors.themeColor,
+                        inactiveTrackColor: Colors.grey[100],
+                        onChanged: (bool value) {
+                          saveUserData(value);
+                          BlocProvider.of<HomeBloc>(context).add(
+                              addUserVerificationEvent(
+                                  (!state.isUserVerified).toString()));
+                        },
+                      );
                     },
                   ),
                 ],

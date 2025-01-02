@@ -13,6 +13,21 @@ class getHomeBalanceEvent extends HomeEvent {
   List<Object> get props => <Object>[];
 }
 
+class getUserVerificationEvent extends HomeEvent {
+  const getUserVerificationEvent();
+
+  @override
+  List<Object> get props => <Object>[];
+}
+
+class addUserVerificationEvent extends HomeEvent {
+  final String isVerified;
+  const addUserVerificationEvent(this.isVerified);
+
+  @override
+  List<Object> get props => <Object>[];
+}
+
 class addHomeBalanceEvent extends HomeEvent {
   final String balance;
   const addHomeBalanceEvent(this.balance);
