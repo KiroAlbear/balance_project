@@ -178,7 +178,8 @@ class _TopupPageState extends BaseState<TopupPage> {
             20.flexPaddingHeight,
             BlocConsumer<BeneficiariesBloc, BeneficiariesState>(
               listenWhen: (previous, current) =>
-                  previous.isPaymentSuccess != current.isPaymentSuccess,
+                  (previous.isPaymentSuccess != current.isPaymentSuccess ||
+                      previous.showErrorMessage != current.showErrorMessage),
               listener: (context, state) {
                 if (state.isPaymentSuccess) {
                   BlocProvider.of<HomeBloc>(context).add(getHomeBalanceEvent());
@@ -189,6 +190,10 @@ class _TopupPageState extends BaseState<TopupPage> {
 
                   Routes.navigateToScreen(Routes.successScreen,
                       NavigateType.pushReplacementNamed, context);
+                } else {
+                  if (state.errorMessage.isNotEmpty) {
+                    AppToast.showToast(state.errorMessage);
+                  }
                 }
               },
               builder: (context, BeneficiariesState state) {

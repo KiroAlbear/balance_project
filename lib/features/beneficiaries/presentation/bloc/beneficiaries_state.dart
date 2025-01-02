@@ -14,6 +14,7 @@ class BeneficiariesState extends ParentState {
   bool isListChanged = false;
   bool showOverlayLoading;
   bool isPaymentSuccess;
+  bool showErrorMessage;
   BeneficiariesState(
       {this.beneficiaries,
       this.amounts,
@@ -21,7 +22,22 @@ class BeneficiariesState extends ParentState {
       this.totalAmountWithoutFees = 0,
       this.showOverlayLoading = false,
       this.isPaymentSuccess = false,
+      this.showErrorMessage = false,
       this.selectedBeneficiaryIndex = -1,
       this.selectedAmountIndex = -1,
       this.isListChanged = false});
+
+  @override
+  List<Object?> get props => [
+        beneficiaries,
+        amounts,
+        totalAmount,
+        totalAmountWithoutFees,
+        showOverlayLoading,
+        isPaymentSuccess,
+        showErrorMessage,
+        selectedBeneficiaryIndex,
+        selectedAmountIndex,
+        isListChanged
+      ];
 }

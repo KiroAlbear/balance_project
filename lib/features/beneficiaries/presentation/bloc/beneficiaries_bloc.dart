@@ -9,8 +9,9 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
   BeneficiariesUseCase beneficiariesUseCase;
   AddBeneficiaryUseCase addBeneficiaryUseCase;
   DeleteBeneficiaryUseCase deleteBeneficiaryUseCase;
+  SecureStorageService secureStorageService;
   BeneficiariesBloc(this.beneficiariesUseCase, this.addBeneficiaryUseCase,
-      this.deleteBeneficiaryUseCase)
+      this.deleteBeneficiaryUseCase, this.secureStorageService)
       : super(BeneficiariesState()) {
     on<getBeneficiariesEvent>(_getBeneficiaries);
     on<addBeneficiaryEvent>(_addBeneficiary);
@@ -159,28 +160,24 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
 
   FutureOr<void> _payBeneficiary(
       payBeneficiaryEvent event, Emitter<BeneficiariesState> emit) async {
-    // emit(state.copyWith(isPaymentSuccess: true));
-    // await SecureStorageService()
-    //     .setValue(SecureStorageKeys.beneficiariesAmounts, "");
+    String balance =
+        await secureStorageService.getValue(SecureStorageKeys.userBalance);
 
-    // await testData(event);
-
-    String balance = await SecureStorageService.getInstance()
-        .getValue(SecureStorageKeys.userBalance);
-
-    String isVerified = await SecureStorageService.getInstance()
-        .getValue(SecureStorageKeys.isUserVerified);
+    String isVerified =
+        await secureStorageService.getValue(SecureStorageKeys.isUserVerified);
 
     int newBalance =
         balance.isEmpty ? -1 : int.parse(balance) - state.totalAmount;
 
     if (newBalance < 0) {
-      emit(state.copyWith(isPaymentSuccess: false));
-      AppToast.showToast("Insufficient balance");
+      emit(state.copyWith(
+          isPaymentSuccess: false, showErrorMessage: !state.showErrorMessage)
+        ..errorMessage = "Insufficient balance");
+
       return;
     }
 
-    String data = await SecureStorageService.getInstance()
+    String data = await secureStorageService
         .getValue(SecureStorageKeys.beneficiariesAmounts);
 
     Map<String, dynamic> map = data.isEmpty ? {} : jsonDecode(data);
@@ -195,29 +192,34 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
     if (isSameMonth &&
         (isVerified.isEmpty || isVerified == "false") &&
         totalAfterSum > 500) {
-      emit(state.copyWith(isPaymentSuccess: false));
-      AppToast.showToast(
-          "You can't pay more than 500 AED per calendar month per beneficiary");
+      emit(state.copyWith(
+          isPaymentSuccess: false, showErrorMessage: !state.showErrorMessage)
+        ..errorMessage =
+            "You can't pay more than 500 AED per calendar month per beneficiary");
+
       return;
     } else if (_isMaximumTopUpReached(map, int.parse(event.amount))) {
-      emit(state.copyWith(isPaymentSuccess: false));
-      AppToast.showToast(
-          "You can't pay more than 3000 AED per calendar month for all beneficiaries");
+      emit(state.copyWith(
+          isPaymentSuccess: false, showErrorMessage: !state.showErrorMessage)
+        ..errorMessage =
+            "You can't pay more than 3000 AED per calendar month for all beneficiaries");
     } else if (isSameMonth && (isVerified == "true") && totalAfterSum > 1000) {
-      emit(state.copyWith(isPaymentSuccess: false));
-      AppToast.showToast(
-          "You can't pay more than 1000 AED per calendar month per beneficiary");
+      emit(state.copyWith(
+          isPaymentSuccess: false, showErrorMessage: !state.showErrorMessage)
+        ..errorMessage =
+            "You can't pay more than 1000 AED per calendar month per beneficiary");
+
       return;
     } else {
       map[event.phoneNumber] = data.isEmpty
           ? "${event.amount}#${DateTime.now().toString()}"
           : "${(currentAmount + int.parse(event.amount)).toString()}#${DateTime.now().toString()}";
 
-      await SecureStorageService.getInstance()
-          .setValue(SecureStorageKeys.beneficiariesAmounts, jsonEncode(map));
+      await secureStorageService.setValue(
+          SecureStorageKeys.beneficiariesAmounts, jsonEncode(map));
 
-      await SecureStorageService.getInstance()
-          .setValue(SecureStorageKeys.userBalance, newBalance.toString());
+      await secureStorageService.setValue(
+          SecureStorageKeys.userBalance, newBalance.toString());
 
       emit(state.copyWith(
           isPaymentSuccess: true,

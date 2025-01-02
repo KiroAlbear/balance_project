@@ -10,6 +10,7 @@ class ProvidersService {
           getIt(),
           getIt(),
           getIt(),
+          SecureStorageService.getInstance(),
         ),
       ),
       BlocProvider<HomeBloc>(

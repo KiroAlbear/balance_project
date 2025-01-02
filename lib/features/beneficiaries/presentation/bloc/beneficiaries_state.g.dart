@@ -19,6 +19,8 @@ abstract class _$BeneficiariesStateCWProxy {
 
   BeneficiariesState isPaymentSuccess(bool isPaymentSuccess);
 
+  BeneficiariesState showErrorMessage(bool showErrorMessage);
+
   BeneficiariesState selectedBeneficiaryIndex(int selectedBeneficiaryIndex);
 
   BeneficiariesState selectedAmountIndex(int selectedAmountIndex);
@@ -38,6 +40,7 @@ abstract class _$BeneficiariesStateCWProxy {
     int? totalAmountWithoutFees,
     bool? showOverlayLoading,
     bool? isPaymentSuccess,
+    bool? showErrorMessage,
     int? selectedBeneficiaryIndex,
     int? selectedAmountIndex,
     bool? isListChanged,
@@ -75,6 +78,10 @@ class _$BeneficiariesStateCWProxyImpl implements _$BeneficiariesStateCWProxy {
       this(isPaymentSuccess: isPaymentSuccess);
 
   @override
+  BeneficiariesState showErrorMessage(bool showErrorMessage) =>
+      this(showErrorMessage: showErrorMessage);
+
+  @override
   BeneficiariesState selectedBeneficiaryIndex(int selectedBeneficiaryIndex) =>
       this(selectedBeneficiaryIndex: selectedBeneficiaryIndex);
 
@@ -101,6 +108,7 @@ class _$BeneficiariesStateCWProxyImpl implements _$BeneficiariesStateCWProxy {
     Object? totalAmountWithoutFees = const $CopyWithPlaceholder(),
     Object? showOverlayLoading = const $CopyWithPlaceholder(),
     Object? isPaymentSuccess = const $CopyWithPlaceholder(),
+    Object? showErrorMessage = const $CopyWithPlaceholder(),
     Object? selectedBeneficiaryIndex = const $CopyWithPlaceholder(),
     Object? selectedAmountIndex = const $CopyWithPlaceholder(),
     Object? isListChanged = const $CopyWithPlaceholder(),
@@ -135,6 +143,11 @@ class _$BeneficiariesStateCWProxyImpl implements _$BeneficiariesStateCWProxy {
           ? _value.isPaymentSuccess
           // ignore: cast_nullable_to_non_nullable
           : isPaymentSuccess as bool,
+      showErrorMessage: showErrorMessage == const $CopyWithPlaceholder() ||
+              showErrorMessage == null
+          ? _value.showErrorMessage
+          // ignore: cast_nullable_to_non_nullable
+          : showErrorMessage as bool,
       selectedBeneficiaryIndex:
           selectedBeneficiaryIndex == const $CopyWithPlaceholder() ||
                   selectedBeneficiaryIndex == null
