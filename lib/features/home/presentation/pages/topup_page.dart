@@ -2,9 +2,15 @@ import 'package:balance_project/imports.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class TopupPage extends BaseStatelessPage {
-  final _bottomSheetHeight = 500.0;
+class TopupPage extends BaseStatefulPage {
   const TopupPage({super.key});
+
+  @override
+  State<TopupPage> createState() => _TopupPageState();
+}
+
+class _TopupPageState extends BaseState<TopupPage> {
+  final _bottomSheetHeight = 500.0;
 
   @override
   Widget? appbarWidget() => CustomAppbar(title: "Payment Details");
@@ -35,6 +41,23 @@ class TopupPage extends BaseStatelessPage {
           );
         },
       ),
+    );
+  }
+
+  void _showSelectBeneficiariesBottomSheet(
+      BuildContext context, BeneficiariesState state) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      useSafeArea: true,
+      backgroundColor: Colors.white,
+      context: context,
+      builder: (context) {
+        return CustomBottomSheet(
+          title: "Select Beneficiary",
+          bottomSheetHeight: _bottomSheetHeight,
+          child: _buildBeneficiariesList(state),
+        );
+      },
     );
   }
 
@@ -82,23 +105,6 @@ class TopupPage extends BaseStatelessPage {
     );
   }
 
-  void _showSelectBeneficiariesBottomSheet(
-      BuildContext context, BeneficiariesState state) {
-    showModalBottomSheet(
-      isScrollControlled: true,
-      useSafeArea: true,
-      backgroundColor: Colors.white,
-      context: context,
-      builder: (context) {
-        return CustomBottomSheet(
-          title: "Select Beneficiary",
-          bottomSheetHeight: _bottomSheetHeight,
-          child: _buildBeneficiariesList(state),
-        );
-      },
-    );
-  }
-
   @override
   Widget body(BuildContext context) {
     return PopScope(
@@ -109,87 +115,124 @@ class TopupPage extends BaseStatelessPage {
         BlocProvider.of<BeneficiariesBloc>(context)
             .add(selectAmountEvent(selectedIndex: -1));
       },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          22.flexPaddingHeight,
-          Text(
-            'Beneficiaries Details',
-            style: CustomTextStyles.regular_14_black(context),
-          ),
-          BlocBuilder<BeneficiariesBloc, BeneficiariesState>(
-            builder: (context, BeneficiariesState state) {
-              if (state.selectedBeneficiaryIndex == -1) {
-                return ChooseBeneficiaryCard(
-                  text: 'Select Beneficiary',
-                  onTap: () {
-                    _showSelectBeneficiariesBottomSheet(context, state);
-                  },
-                );
-              } else {
-                return BeneficiaryItem(
-                  showDeleteButton: false,
-                  index: state.selectedBeneficiaryIndex,
-                  name: state
-                      .beneficiaries![state.selectedBeneficiaryIndex].name!,
-                  phone: state.beneficiaries![state.selectedBeneficiaryIndex]
-                      .phoneNumber!,
-                  onTap: (p0) {
-                    _showSelectBeneficiariesBottomSheet(context, state);
-                  },
-                );
-              }
-            },
-          ),
-          12.flexPaddingHeight,
-          Text(
-            'Amount Details',
-            style: CustomTextStyles.regular_14_black(context),
-          ),
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        resizeToAvoidBottomInset: true,
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            22.flexPaddingHeight,
+            Text(
+              'Beneficiaries Details',
+              style: CustomTextStyles.regular_14_black(context),
+            ),
+            BlocBuilder<BeneficiariesBloc, BeneficiariesState>(
+              builder: (context, BeneficiariesState state) {
+                if (state.selectedBeneficiaryIndex == -1) {
+                  return ChooseBeneficiaryCard(
+                    text: 'Select Beneficiary',
+                    onTap: () {
+                      _showSelectBeneficiariesBottomSheet(context, state);
+                    },
+                  );
+                } else {
+                  return BeneficiaryItem(
+                    showDeleteButton: false,
+                    index: state.selectedBeneficiaryIndex,
+                    name: state
+                        .beneficiaries![state.selectedBeneficiaryIndex].name!,
+                    phone: state.beneficiaries![state.selectedBeneficiaryIndex]
+                        .phoneNumber!,
+                    onTap: (p0) {
+                      _showSelectBeneficiariesBottomSheet(context, state);
+                    },
+                  );
+                }
+              },
+            ),
+            12.flexPaddingHeight,
+            Text(
+              'Amount Details',
+              style: CustomTextStyles.regular_14_black(context),
+            ),
 
-          BlocBuilder<BeneficiariesBloc, BeneficiariesState>(
-            builder: (context, BeneficiariesState state) {
-              if (state.selectedAmountIndex == -1) {
-                return ChooseBeneficiaryCard(
-                  text: 'Select Amount',
-                  onTap: () {
-                    _showSelectAmountBottomSheet(context, state);
-                  },
-                );
-              } else {
-                return AmountItem(
-                  value: state.amounts![state.selectedAmountIndex].amount,
-                  index: state.selectedAmountIndex,
-                  onTap: (int index) {
-                    _showSelectAmountBottomSheet(context, state);
-                  },
-                );
-              }
-            },
-          ),
+            BlocBuilder<BeneficiariesBloc, BeneficiariesState>(
+              builder: (context, BeneficiariesState state) {
+                if (state.selectedAmountIndex == -1) {
+                  return ChooseBeneficiaryCard(
+                    text: 'Select Amount',
+                    onTap: () {
+                      _showSelectAmountBottomSheet(context, state);
+                    },
+                  );
+                } else {
+                  return AmountItem(
+                    value: state.amounts![state.selectedAmountIndex].amount,
+                    index: state.selectedAmountIndex,
+                    onTap: (int index) {
+                      _showSelectAmountBottomSheet(context, state);
+                    },
+                  );
+                }
+              },
+            ),
 
-          // AmountItem(value: "EGP 100", index: 2),
-          // ChooseBeneficiaryCard(
-          //   text: 'Select Amount',
-          //   onTap: () {},
-          // ),
-          20.flexPaddingHeight,
-          LineSeparatorWidget(
-            paddingHeight: AppDimensions.h(10),
-          ),
-          const CostRow(title: "Transaction Amount", cost: "10"),
-          const CostRow(title: "Transaction Fees", cost: "2"),
-          const LineSeparatorWidget(
-            paddingHeight: 10,
-          ),
-          25.flexPaddingHeight,
-          CustomGradientButton(
-              text: "Pay",
-              onTap: () {
-                Routes.navigateToScreen(
-                    Routes.successScreen, NavigateType.pushNamed, context);
-              })
-        ],
+            // AmountItem(value: "EGP 100", index: 2),
+            // ChooseBeneficiaryCard(
+            //   text: 'Select Amount',
+            //   onTap: () {},
+            // ),
+            20.flexPaddingHeight,
+
+            BlocBuilder<BeneficiariesBloc, BeneficiariesState>(
+              builder: (context, BeneficiariesState state) {
+                return Column(
+                  children: [
+                    (state.selectedAmountIndex != -1 &&
+                            state.selectedBeneficiaryIndex != -1)
+                        ? Column(
+                            children: [
+                              LineSeparatorWidget(
+                                paddingHeight: AppDimensions.h(10),
+                              ),
+                              CostRow(
+                                  title: "Transaction Amount",
+                                  cost: state
+                                      .amounts![state.selectedAmountIndex]
+                                      .amount
+                                      .toString()),
+                              const CostRow(
+                                  title: "Transaction Fees", cost: "3"),
+                              const LineSeparatorWidget(
+                                paddingHeight: 10,
+                              ),
+                              CostRow(
+                                title: "Total Fees",
+                                cost: state.totalAmount.toString(),
+                                isTotal: true,
+                              ),
+                            ],
+                          )
+                        : SizedBox(),
+                    25.flexPaddingHeight,
+                    CustomGradientButton(
+                        text: "Pay",
+                        onTap: () {
+                          if (state.selectedAmountIndex == -1 ||
+                              state.selectedBeneficiaryIndex == -1) {
+                            AppToast.showToast(
+                                "Please select amount and beneficiary");
+                          } else {
+                            Routes.navigateToScreen(Routes.successScreen,
+                                NavigateType.pushNamed, context);
+                          }
+                        })
+                  ],
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

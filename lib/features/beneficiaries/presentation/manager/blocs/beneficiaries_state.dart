@@ -9,11 +9,15 @@ class BeneficiariesState extends ParentState {
   List<AmountModel>? amounts;
   int selectedAmountIndex;
   int selectedBeneficiaryIndex;
+  int totalAmount = 0;
+  int totalAmountWithoutFees = 0;
   bool isListChanged = false;
   bool showOverlayLoading;
   BeneficiariesState(
       {this.beneficiaries,
       this.amounts,
+      this.totalAmount = 0,
+      this.totalAmountWithoutFees = 0,
       this.showOverlayLoading = false,
       this.selectedBeneficiaryIndex = -1,
       this.selectedAmountIndex = -1,

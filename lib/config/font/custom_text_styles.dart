@@ -40,6 +40,13 @@ class CustomTextStyles {
         fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black)!;
   }
 
+  static TextStyle bold_14_blue(BuildContext context) {
+    return TextStyleBlueprint.style(context,
+        fontWeight: FontWeight.bold,
+        fontSize: 14,
+        color: StaticColors.themeColor)!;
+  }
+
   static TextStyle regular_16_white(BuildContext context) {
     return TextStyleBlueprint.style(context,
         fontSize: 16, fontWeight: FontWeight.w400, color: Colors.white)!;
@@ -53,6 +60,11 @@ class CustomTextStyles {
   static TextStyle regular_14_black(BuildContext context) {
     return TextStyleBlueprint.style(context,
         fontSize: 14, color: Colors.black)!;
+  }
+
+  static TextStyle regular_14_blue(BuildContext context) {
+    return TextStyleBlueprint.style(context,
+        fontSize: 14, color: StaticColors.themeColor)!;
   }
 
   static TextStyle regular_16_black(BuildContext context) {

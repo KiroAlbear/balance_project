@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 class CostRow extends StatelessWidget {
   final String title;
   final String cost;
-  const CostRow({super.key, required this.title, required this.cost});
+  final bool isTotal;
+  const CostRow(
+      {super.key,
+      required this.title,
+      required this.cost,
+      this.isTotal = false});
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +22,18 @@ class CostRow extends StatelessWidget {
             flex: 3,
             child: Text(
               title,
-              style: CustomTextStyles.regular_14_black(context),
+              style: isTotal
+                  ? CustomTextStyles.bold_14_blue(context)
+                  : CustomTextStyles.regular_14_black(context),
             ),
           ),
           Expanded(
             flex: 1,
             child: Text(
               ": AED $cost",
-              style: CustomTextStyles.bold_14_black(context),
+              style: isTotal
+                  ? CustomTextStyles.bold_14_blue(context)
+                  : CustomTextStyles.bold_14_black(context),
             ),
           ),
         ],

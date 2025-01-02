@@ -11,6 +11,10 @@ abstract class _$BeneficiariesStateCWProxy {
 
   BeneficiariesState amounts(List<AmountModel>? amounts);
 
+  BeneficiariesState totalAmount(int totalAmount);
+
+  BeneficiariesState totalAmountWithoutFees(int totalAmountWithoutFees);
+
   BeneficiariesState showOverlayLoading(bool showOverlayLoading);
 
   BeneficiariesState selectedBeneficiaryIndex(int selectedBeneficiaryIndex);
@@ -28,6 +32,8 @@ abstract class _$BeneficiariesStateCWProxy {
   BeneficiariesState call({
     List<BeneficiariesModel>? beneficiaries,
     List<AmountModel>? amounts,
+    int? totalAmount,
+    int? totalAmountWithoutFees,
     bool? showOverlayLoading,
     int? selectedBeneficiaryIndex,
     int? selectedAmountIndex,
@@ -48,6 +54,14 @@ class _$BeneficiariesStateCWProxyImpl implements _$BeneficiariesStateCWProxy {
   @override
   BeneficiariesState amounts(List<AmountModel>? amounts) =>
       this(amounts: amounts);
+
+  @override
+  BeneficiariesState totalAmount(int totalAmount) =>
+      this(totalAmount: totalAmount);
+
+  @override
+  BeneficiariesState totalAmountWithoutFees(int totalAmountWithoutFees) =>
+      this(totalAmountWithoutFees: totalAmountWithoutFees);
 
   @override
   BeneficiariesState showOverlayLoading(bool showOverlayLoading) =>
@@ -76,6 +90,8 @@ class _$BeneficiariesStateCWProxyImpl implements _$BeneficiariesStateCWProxy {
   BeneficiariesState call({
     Object? beneficiaries = const $CopyWithPlaceholder(),
     Object? amounts = const $CopyWithPlaceholder(),
+    Object? totalAmount = const $CopyWithPlaceholder(),
+    Object? totalAmountWithoutFees = const $CopyWithPlaceholder(),
     Object? showOverlayLoading = const $CopyWithPlaceholder(),
     Object? selectedBeneficiaryIndex = const $CopyWithPlaceholder(),
     Object? selectedAmountIndex = const $CopyWithPlaceholder(),
@@ -90,6 +106,17 @@ class _$BeneficiariesStateCWProxyImpl implements _$BeneficiariesStateCWProxy {
           ? _value.amounts
           // ignore: cast_nullable_to_non_nullable
           : amounts as List<AmountModel>?,
+      totalAmount:
+          totalAmount == const $CopyWithPlaceholder() || totalAmount == null
+              ? _value.totalAmount
+              // ignore: cast_nullable_to_non_nullable
+              : totalAmount as int,
+      totalAmountWithoutFees:
+          totalAmountWithoutFees == const $CopyWithPlaceholder() ||
+                  totalAmountWithoutFees == null
+              ? _value.totalAmountWithoutFees
+              // ignore: cast_nullable_to_non_nullable
+              : totalAmountWithoutFees as int,
       showOverlayLoading: showOverlayLoading == const $CopyWithPlaceholder() ||
               showOverlayLoading == null
           ? _value.showOverlayLoading

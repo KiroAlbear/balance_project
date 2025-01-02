@@ -118,6 +118,8 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
       selectAmountEvent event, Emitter<BeneficiariesState> emit) {
     emit(state.copyWith(
       selectedAmountIndex: event.selectedIndex,
+      totalAmountWithoutFees: amounts[event.selectedIndex].amount,
+      totalAmount: amounts[event.selectedIndex].amount + 3,
     ));
   }
 }

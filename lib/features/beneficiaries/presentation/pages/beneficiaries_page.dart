@@ -34,22 +34,6 @@ class _BeneficiariesPageState extends BaseState<BeneficiariesPage> {
           bottomSheetHeight: 500,
           child: AddBeneficirayForm(itemsCount: _beneficiariesCount),
         );
-        // return SizedBox(
-        //   height: 500,
-        //   child: Column(
-        //     crossAxisAlignment: CrossAxisAlignment.stretch,
-        //     children: [
-        //       20.flexPaddingHeight,
-        //       Text(
-        //         "Add Beneficiary",
-        //         textAlign: TextAlign.center,
-        //         style: CustomTextStyles.bold_20_black_appbarText(context),
-        //       ),
-        //       20.flexPaddingHeight,
-        //       AddBeneficirayForm(itemsCount: _beneficiariesCount)
-        //     ],
-        //   ),
-        // );
       },
     );
   }
