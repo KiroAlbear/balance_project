@@ -61,6 +61,20 @@ class _ProfilePageState extends BaseState<ProfilePage> {
                   ),
                 ],
               ),
+              20.flexPaddingHeight,
+              Center(
+                child: CustomElevatedButton(
+                  child: const Text(
+                    "Reset All Transactions Data",
+                  ),
+                  onPressed: () async {
+                    await SecureStorageService.getInstance()
+                        .resetTransactionsValues();
+                    AppToast.showToast("All Transactions Data is Reset",
+                        type: AppToastType.success);
+                  },
+                ),
+              ),
             ],
           )),
     );

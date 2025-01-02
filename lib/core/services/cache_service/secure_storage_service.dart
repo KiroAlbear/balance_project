@@ -1,3 +1,4 @@
+import 'package:balance_project/core/services/cache_service/secure_storage_keys.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SecureStorageService {
@@ -6,6 +7,11 @@ class SecureStorageService {
 
   static SecureStorageService getInstance() {
     return _instance ??= SecureStorageService();
+  }
+
+  Future<void> resetTransactionsValues() async {
+    await _storage.write(
+        key: SecureStorageKeys.beneficiariesAmounts, value: "");
   }
 
   Future<void> setValue(String key, String? value) async {
