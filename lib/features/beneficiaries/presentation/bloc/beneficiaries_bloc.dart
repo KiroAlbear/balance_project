@@ -74,7 +74,7 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
 
   FutureOr<void> _addBeneficiary(
       addBeneficiaryEvent event, Emitter<BeneficiariesState> emit) async {
-    emit(state.copyWith(showOverlayLoading: false)..status = Status.loading);
+    emit(state.copyWith(showOverlayLoading: true)..status = Status.success);
 
     Either<Failure, ApiResponseModel> result = await addBeneficiaryUseCase.call(
         AddBeneficiaryUseCaseParams(
