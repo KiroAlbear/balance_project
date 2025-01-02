@@ -211,7 +211,7 @@ class BeneficiariesBloc extends Bloc<BeneficiariesEvent, BeneficiariesState> {
     } else {
       map[event.phoneNumber] = data.isEmpty
           ? "${event.amount}#${DateTime.now().toString()}"
-          : "${(currentAmount + int.parse(event.amount)).toString()}:${DateTime.now().toString()}";
+          : "${(currentAmount + int.parse(event.amount)).toString()}#${DateTime.now().toString()}";
 
       await SecureStorageService.getInstance()
           .setValue(SecureStorageKeys.beneficiariesAmounts, jsonEncode(map));
