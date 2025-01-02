@@ -16,13 +16,22 @@ class ServerErrorWidget extends StatelessWidget {
         22.flexPaddingHeight,
         Padding(
           padding: EdgeInsets.symmetric(horizontal: AppDimensions.w(50)),
-          child: Text(
-            'Please make sure that you have a stable internet connection and try again',
-            style: TextStyle(
-                fontSize: AppDimensions.getFonTSize14,
-                fontWeight: TextStyleBlueprint.regularFontWeight,
-                color: StaticColors.black_735),
-            textAlign: TextAlign.center,
+          child: Column(
+            children: [
+              Image.asset(
+                Assets.images.png.alert.path,
+                width: 100,
+              ),
+              20.flexPaddingHeight,
+              Text(
+                'Could not connect to the server',
+                style: TextStyle(
+                    fontSize: AppDimensions.getFonTSize16,
+                    fontWeight: TextStyleBlueprint.regularFontWeight,
+                    color: StaticColors.black_735),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
         )
       ],
